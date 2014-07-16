@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instalacion>
+  <configuracion>
+    <nombre>RRHH</nombre>
+    <creador>Luis Gago</creador>
+    <imagen>img/logo.png</imagen>
+    <archivo>inicio</archivo>
+	<estilos>css/estilos.css</estilos>
+  </configuracion>
+</instalacion>

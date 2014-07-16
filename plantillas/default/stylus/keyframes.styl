@@ -1,0 +1,117 @@
+.animated
+	-webkit-animation-duration 1s
+	-moz-animation-duration 1s
+	-o-animation-duration 1s
+	animation-duration 1s
+	-webkit-animation-fill-mode both
+	-moz-animation-fill-mode both
+	-o-animation-fill-mode both
+	animation-fill-mode both
+
+@keyframes bounceInDown
+	0%
+		opacity 0
+		-webkit-transform translateY(-2000px)
+
+	60%
+		opacity 1
+		-webkit-transform translateY(30px)
+
+	80%
+		-webkit-transform translateY(-10px)
+
+	100%
+		-webkit-transform translateY(0)
+
+.bounceInDown
+	-webkit-animation-name bounceInDown
+	-moz-animation-name bounceInDown
+	-o-animation-name bounceInDown
+	animation-name bounceInDown
+
+//
+
+.fadeIn
+	-o-animation-name fadeIn
+	-ms-animation-name fadeIn
+	-moz-animation-name fadeIn
+	-webkit-animation-name fadeIn
+	animation-name fadeIn
+
+.fadeOut
+	-o-animation-name fadeOut
+	-ms-animation-name fadeOut
+	-moz-animation-name fadeOut
+	-webkit-animation-name fadeOut
+	animation-name fadeOut
+
+.bounceOutUp
+	-o-animation-name bounceOutUp
+	-ms-animation-name bounceOutUp
+	-moz-animation-name bounceOutUp
+	-webkit-animation-name bounceOutUp
+	animation-name bounceOutUp
+
+@keyframes fadeIn
+	0%
+		opacity 0
+
+	100%
+		opacity 1
+
+@keyframes fadeOut
+	0%
+		opacity 1
+
+	100%
+		opacity 0
+
+@keyframes bounceOutUp
+	0%
+		transform translateY(0)
+
+	20%
+		opacity 1
+		transform translateY(20px)
+
+	100%
+		opacity 0
+		transform translateY(-2000px)
+
+//
+
+.latido
+	animation-name latido
+	animation-timing-function linear
+	animation-iteration-count infinite
+	animation-duration 4s
+
+
+@keyframes latido
+	0%
+		transform:scale(1)
+		opacity:1
+
+	47%
+		transform:scale(1)
+		opacity:0.7
+
+	48%
+		transform:scale(0.8)
+		opacity:0.9
+
+	50%
+		transform:scale(1.4)
+		opacity:0.7
+
+	52%
+		transform:scale(0.8);
+		opacity:0.9;
+
+	54%
+		transform:scale(1);
+		opacity:0.7;
+
+	100%
+		transform:scale(1);
+		opacity:0.9

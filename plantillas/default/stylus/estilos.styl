@@ -1,0 +1,846 @@
+@import 'nib/vendor'
+@import 'form.styl'
+@import 'simplegrid.styl'
+vendor-prefixes = o ms moz webkit
+//Colores
+// color1 = #FF0000
+// color2 = #FF0000
+color1 = #3F9529
+color2 = #582A9C
+@font-face
+  font-family 'Dosis'
+  font-style normal
+  font-weight 400
+  src local('Dosis Regular'), local('Dosis-Regular'), url("../fonts/xIAtSaglM8LZOYdGmG1JqQ.woff") format('woff')
+@font-face
+  font-family 'Open Sans'
+  font-style normal
+  font-weight 400
+  src local('Open Sans'), local('OpenSans'), url("../fonts/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff") format('woff')
+@font-face
+	font-family 'Berlin Sans Fb Demi' src url('../fonts/berlin-sans-fb-demi-bold.ttf') format ('ttf')
+border-radius()
+	-webkit-border-radius arguments
+	-moz-border-radius arguments
+	ms-border-radius arguments
+	o-border-radius arguments
+	border-radius arguments
+appearance()
+	-webkit-appearance arguments
+	-moz-appearance arguments
+	ms-appearance arguments
+	o-appearance arguments
+	appearance arguments
+box-shadow()
+	-webkit-box-shadow arguments
+	-moz-box-shadow arguments
+	ms-box-shadow arguments
+	o-box-shadow arguments
+	box-shadow arguments
+transform()
+	-webkit-transform arguments
+	-moz-transform arguments
+	ms-transform arguments
+	o-transform arguments
+	transform arguments
+*
+	margin 0
+html,button,input,select,textarea
+	color #222
+body
+	background color2
+	color #323E4A
+	font-family 'Open Sans',Arial,Sans-serif
+	font-size 16px
+	margin 0px
+::-moz-selection
+	background #ffa500
+	color #fff
+	text-shadow none
+::selection
+	background #ffa500
+	color #fff
+	text-shadow none
+hr
+	border 0
+	border-top 1px solid #ccc
+	display block
+	height 1px
+	margin 1em 0
+	padding 0
+img
+	vertical-align middle
+fieldset
+	border 0
+	margin 0
+	padding 0
+textarea
+	resize vertical
+blockquote
+	margin 5px 0px 5px 20px
+#pagina
+	margin 0px 0px 0px 0px
+	padding 0px 0px 0px 0px
+#flotar
+    left 0px
+    margin 0 auto
+    position fixed
+    right 0px
+    top 0px
+    z-index 999
+.flotarr
+    // border-left 5px solid #FFFFFF
+    // border-right 5px solid #FFFFFF
+    background color1 !important
+    border-bottom 5px solid #FFFFFF
+    border-radius 0 0 10px 0px
+    box-shadow 0 0 20px #666
+    box-sizing border-box
+.cabecera
+	//background-color #AF3636
+	background-color color1
+	height 53px
+	margin 0px auto 0px auto
+	padding 0px 0px 0px 0px
+	width 100%
+.logo
+	background-color #FFF
+	border-radius 0px 30px 30px 0px
+	float left
+	height auto
+	margin 0px 0px 0px 0px
+	padding 0px 20px 1px 45px
+	width 225px
+	img
+		display block
+		height auto
+		width 100%
+.menuuser
+	float right
+	margin 6px 2px 0px 0px
+	padding 0px 0px 0px 0px
+	ul
+		margin 0px 0px 0px 0px
+		padding 0px 0px 0px 0px
+		li
+			list-style none
+			a
+				font-size 16px
+				display block
+				text-decoration none
+				color #FFF
+				&:hover
+					background-color rgba(194, 194, 194, 0.3)
+			.avatar
+				width 45px
+				height 45px
+				margin -3px 0 0 5px
+				border-radius 50px
+				img
+					width 100%
+			ul
+				margin 0px 0px 0px 0px
+				padding 0px 0px 0px 0px
+				display none
+				//background #FFF
+				background-color color1
+				border-radius 0px 0px 5px 5px
+				box-shadow 0px 3px 4px rgba(0, 0, 0, 0.3)
+				li
+					margin 0px 0px 0px 0px
+					display block
+					a
+						padding 5px 5px 5px 5px
+						color #FFF
+						&:hover
+							background-color rgba(194, 194, 194, 0.3)
+		&:hover ul
+			display block
+			width 100%
+.menuprincipal
+	position absolute
+	top 0
+	z-index -1
+	text-align right
+	.nav
+		padding 0px 0px 0px 240px
+		text-align left
+	ul
+		margin 3px 0px
+		li
+			display inline-block
+			margin 12px 0px 0px 0px
+			a
+				text-decoration none
+				color #FFFFFF
+				//font-family 'Titillium Web', sans-serif
+				padding 5px
+				text-align center
+				//background-color #C45F2F
+				//background-color #af3636
+				background-color color1
+				border-radius 3px 3px 3px 3px
+				font-size 15px
+				border-bottom 5px solid color1
+				&:hover
+					background #1297DA
+					border-bottom 5px solid #FFFFFF
+			ul
+				display none
+				position absolute
+				margin 5px 0px 0px 0px
+				padding 0px
+				li
+					margin 5px 0 0px 0
+					a
+						box-shadow 0 0px 5px rgba(0, 0, 0, 0.5);
+						display block
+			&:hover > ul, &:hover ul li
+				display block
+				width 135px
+				ul
+					margin -40px 0 0 137px
+					text-align left
+					li
+						margin 5px 0px 0px 0px
+.centro_login, .centro
+	background-color #FFF
+	border-radius 5px
+.centro_login
+	margin 15% auto 0px auto
+	padding 0 0 0 0
+	max-width 370px
+.centro
+	margin 60px auto 0px auto
+	padding 0px 0px 0px 0px
+	width 95%
+.componentes
+	vertical-align top
+	h1
+		text-align center
+		margin 5px 0px 10px 0px
+		text-transform capitalize
+	.componente
+		width auto
+		height auto
+		display block
+		margin 0px 0px 10px 0px
+		h2
+			margin 0 0 0 0px
+			padding 0 0 0 0px
+			font-size 17px
+			background-color #45505c
+			border-radius 5px
+			box-shadow -1px 1px 5px #45505c
+			color #fff
+			font-weight normal
+			text-align center
+		.descripcion
+			background-color rgba(204, 204, 204, 0.29)
+			color #000
+			border-radius 0px 0px 10px 0px
+			padding 0px 5px 5px 5
+			font-size 13px
+			padding 0px 5px 5px 5px
+			img
+				width 100%
+.menu
+	margin 0px
+	ul
+		margin 0px
+		padding 0px
+		li
+			margin 0px
+			list-style none
+			a
+				text-decoration none
+				font-size 17px
+				padding 0px 0 0px 20px
+				margin 0 0 0 0
+				color #3B8EBD
+				display block
+				// font-weight bold
+				// font-family 'Dosis'
+				&:before
+					content "»"
+					padding 0px 3px 0px 0px
+				&:hover
+					background-color rgba(233, 233, 233, 0.35)
+					border-radius 0px 20px 20px 0px
+.menucompo
+	text-decoration none
+	vertical-align text-top
+	display inline-block
+	transition all .2s linear
+	color #000
+	img
+		width 20px !important
+		height auto
+		margin 10px 5px 0px 5px
+		vertical-align bottom
+.btnopcion
+	text-decoration none
+	vertical-align text-top
+	display inline-block
+	transition all .2s linear
+	color #000
+	img
+		width 30px !important
+		height auto
+		&:hover
+			zoom 0.9
+			display inline-block
+			position relative
+	//imagenes de video
+.imgvideoactual
+	display inline-block
+	vertical-align top
+	width 220px
+	img
+		width 100%
+		border 10px solid #78AF32
+.imgvideootras
+	display inline-block
+	margin 0px 0px 0px 15px
+	img
+		cursor pointer
+	//fin video
+.tlcabecera
+	display block
+	height 35px
+	span
+		display inline
+		vertical-align bottom
+		color #ffa500
+	.dondeir
+		margin 70px auto 0px auto
+		width 600px
+		text-align center
+		p
+			margin 0px 0px 25px 0px
+			padding 0px 0px
+			font-size 26px
+		a
+			padding 10px 20px 10px 20px
+			font-size 15px
+			text-decoration none
+			background-color #000
+			border-radius 3px
+			margin 0px 7px 0px 7px
+			color #FFF
+	h1
+		margin 0px
+	h3
+		margin 15px 0px 5px 0px
+		padding 0px
+		font-size 15px
+		color #491374
+		font-weight normal
+		display inline
+	h2
+		display inline
+		font-size 17px
+		vertical-align bottom
+		a
+			text-decoration none
+			color #5C6FBB
+			font-size 15px
+	input[type="text"]
+		transition all .2s linear
+		-webkit-appearance none
+		background #fff
+		box-shadow inset 0 0 0 2px rgba(0,39,59,.2)
+		padding 2px 10px
+		margin 0
+		border-radius 4px
+		width 95%
+		font-size 13px
+		height 32px
+		border 0
+		&:focus
+			outline 0
+			box-shadow inset 0 0 0 2px rgba(0,39,59,.35)
+	label
+		position relative
+		&:after
+			content '<>'
+			font 11px "Open Sans", monospace
+			color #aaa
+			-webkit-transform rotate(90deg)
+			-moz-transform rotate(90deg)
+			-ms-transform rotate(90deg)
+			transform rotate(90deg)
+			right 8px
+			top 2px
+			padding 0 0 2px
+			border-bottom 1px solid #ddd
+			position absolute
+			pointer-events none
+		&:before
+			content ''
+			right 6px
+			top 0px
+			width 20px
+			height 20px
+			background #f8f8f8
+			position absolute
+			pointer-events none
+			display block
+		select
+			margin 0px 0px 0px 0px
+			padding 5px
+			border-radius 4px
+			box-shadow 0 3px 0 #ccc, 0 -1px #fff inset
+			background #f8f8f8
+			color #888
+			border none
+			outline none
+			display inline-block
+			appearance none
+			option
+				font-weight bolder
+				border-radius 5px
+				color #FFFFFF
+				border 1px #ccc solid
+				background #ccc
+
+				&:first-child
+					font-size 1.5em
+	button
+		width 100px
+		transition all .2s linear
+		-webkit-appearance none
+		background #fff
+		box-shadow inset 0 0 0 2px rgba(0,39,59,.2)
+		padding 7px 10px
+		margin 0
+		border-radius 4px
+		font-size 13px
+		height 32px
+		border 0
+		cursor pointer
+.titulos
+	margin 0px auto 0px auto
+	padding 0px 0px 0px 0px
+	text-align left
+	width 100%
+	background-color #F3F3F3
+	border-bottom 3px solid #C0C0C0
+	li
+		display inline-block
+		margin 0px -4px 0px 0px
+		padding 5px 5px 5px 5px
+		list-style-type none
+		border 0px
+		background-color #F3F3F3
+		color #000
+		width 13%
+		text-align center
+		vertical-align middle
+.resultados
+	margin 0px auto 0px auto
+	padding 0px 0px 0px 0px
+	text-align left
+	transition all .2s linear
+	.showSingle
+		cursor pointer
+	.mailverificado
+		width 40px
+	li
+		display inline-block
+		margin 0px -4px 0px 0px
+		padding 5px 5px 5px 5px
+		list-style-type none
+		border 0px
+		color #666
+		width 13%
+		overflow hidden
+		vertical-align middle
+		text-align center
+		vertical-align middle
+		word-wrap break-word
+		a
+			text-decoration none
+			color #666
+			font-weight bold
+			img
+				width 100%
+		.oculto
+			color #F00
+		.nuevo
+			color #2A5708
+	&:nth-child(2n+1)
+		background-color rgba(112, 0, 255, 0.02)
+	&:hover
+		background rgba(0, 112, 255, 0.1)
+.showall
+	width 95%
+	margin 0px auto
+	display none
+	.titulos
+		margin 10px auto 0px auto
+		padding 0px 0px 0px 0px
+		text-align center
+		width 100%
+		background-color #F3F3F3
+		border-bottom 3px solid #C0C0C0
+		border-radius 10px 10px 0px 0px
+		box-shadow 0px 0px 5px #000
+		li
+			display inline-block
+			margin 0px -4px 0px 0px
+			padding 5px 5px 5px 5px
+			list-style-type none
+			border 0px
+			background-color #F3F3F3
+			color #000
+			width 11%
+			text-align center
+			vertical-align middle
+.todainfo
+	background #f3f3f3
+	margin 0px 0px 15px 0px
+	padding 0px
+	color #336E8F
+	text-align center
+	border-radius 0px 0px 10px 10px
+	box-shadow 0px 0px 1px #000
+	li
+		display inline-block
+		margin 0px -4px 0px 0px
+		padding 5px 5px 5px 5px
+		list-style-type none
+		border 0px
+		color #666
+		width 11%
+		overflow hidden
+		vertical-align middle
+		text-align center
+		vertical-align middle
+		word-wrap break-word
+.login
+	text-align center
+.contact_form
+	h2
+		color #C52D2D
+		font-size 20px
+		padding 0px
+		text-shadow 1px 1px 1px #CCCCCC
+		margin 0px
+	ul
+		list-style-type none
+		margin 0px auto
+		padding 0px
+		li
+			padding 15px 0px 10px 0px
+			label
+				color #555555
+				display inline-block
+				float left
+				font-family sans-serif
+				font-size 13px
+				font-weight bold
+				margin-top 3px
+				padding 3px
+				width 90px
+				box-sizing initial
+			.campo
+				height 20px
+				width 200px
+				padding 5px 8px
+				border 1px solid #aaa
+				box-shadow 0px 0px 3px #ccc, 0 10px 15px #eee inset
+				border-radius 2px
+				color #888
+				font-size 12px
+				padding-right 30px
+				transition padding 0.25s
+				box-sizing initial
+				&:focus
+					background #fff
+					border 1px solid #555
+					box-shadow 0 0 3px #aaa
+					padding-right 50px
+			input:required:valid
+				box-shadow 0 0 5px #5cd053
+				border-color #28921f
+			input:focus:invalid
+				box-shadow 0 0 5px #d45252
+				border-color #b03535
+			button.submit
+				padding 9px 17px
+				font-weight bold
+				line-height 1
+				color #444
+				border none
+				text-shadow 0 1px 1px rgba(255, 255, 255, 0.85)
+				background-image -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#bbb))
+				background-image -moz-linear-gradient(0% 100% 90deg, #BBBBBB, #FFFFFF)
+				background-color #fff
+				border 1px solid #f1f1f1
+				border-radius 10px
+				box-shadow 0 1px 2px rgba(0, 0, 0, 0.5)
+			button.submit:hover
+				opacity 0.55
+				cursor pointer
+				color #838383
+			button.submit:active
+				border 1px solid #222
+				box-shadow 0 0 10px 5px #444 inset
+.pie_login
+	bottom 0
+	color #FFF
+	font-size 14px
+	left 0
+	margin 0px auto 0px auto
+	padding 0px 0px 0px 0px
+	position absolute
+	right 0
+	max-width 1000px
+.pie
+	color #FFF
+	font-size 14px
+	margin 0px auto 0px auto
+	padding 0px 0px 0px 0px
+	max-width 1000px
+.izquierdo
+	float left
+	margin 0px 0px 0px 20px
+	text-align center
+
+	a
+		color #74A303
+.derecho
+	float right
+	margin 8px 20px 0px 0px
+	a
+		text-decoration none
+		img
+			width 75px
+.pe
+	color #E4211B
+	text-shadow 0px 0px 10px #000
+// Componentes
+.fotoperfil
+	max-width 50px
+.estado
+	border-radius 50px
+	width 20px
+	height 20px
+	display block
+	margin 0px auto
+.bg1
+	background #3f9529
+.bg2
+	background #952929
+// perfil datos
+.listap
+	list-style none
+	span
+		padding 5px 5px 0px 0px
+		width 140px
+		display inline-block
+		text-align right
+		background rgba(172, 172, 172, 0.3)
+		border-bottom 2px solid #FFF
+.fotop
+	max-width 300px
+// mensajes
+.mensaje
+	margin 0px auto
+	width 300px
+	height auto
+	position fixed
+	left 0
+	right 0
+	top 210px
+	padding 10px
+	background #FFF
+	box-shadow 0px 0px 5px 1px #ADADAD
+	color #000
+	display none
+	border-radius 5px
+	text-align center
+	.numero
+		border none
+		background #FFF
+		text-align center
+		width 15px
+		font-weight bold
+.btnm
+	background-color #000
+	border-radius 30px
+	color #FFF
+	display inline-block
+	font-size 12px
+	height 25px
+	line-height 15px
+	padding 4px
+	text-decoration none
+	transition background-color 0.5s ease
+	width 25px
+	&:hover
+		background-color green
+.mensaje_editar
+	display none
+.select001:hover
+	background #EEE
+// Mensaje Flotante 2
+.jo
+	background #000
+.mensaje, .error, .ja, .jo
+	position absolute
+	// width 650px
+	height auto
+	top 20%
+	left 50%
+	margin-left -325px
+	box-shadow 0px 0px 10px #000
+	padding 5px 5px 5px 5px
+	border-radius 10px
+	z-index 11520
+	transition opacity 0.3s
+	.texto
+		background #fff
+		display inline-block
+		// margin-left 36px
+		padding 2px 5px 5px 5px
+		border-radius 10px
+		width 100%
+		box-sizing border-box
+		.boton-verde
+			background #00b941
+			border 1px solid #009a34
+			color #fff
+			font-size 13.5px
+			border-radius 5px
+			padding 8px 15px
+			text-transform uppercase
+			cursor pointer
+			margin 20px 0px 0px 0px
+		.boton-verde_bloqueado
+			background #BEBEBE !important
+			border 1px solid #eee !important
+			color #DADADA !important
+			cursor default !important
+	.cerrar
+		font-size 15px
+		position absolute
+		display block
+		background #000
+		right 0px
+		top 0px
+		padding 6px
+		border-radius 20px
+		width 20px
+		height 20px
+		color #FFF
+		line-height 5px
+		margin -5px -5px 0px 0px
+		box-shadow 0px 0px 2px #FFF
+		cursor pointer
+.overlay
+	background rgba(0,0,0,0.5)
+	position fixed
+	top 0
+	bottom 0
+	left 0
+	right 0
+	cursor default
+.asgcurso
+	padding 2px
+	background-color rgba(176, 199, 219, 0.87)
+	border-radius 5px
+	color #000 !important
+	text-decoration none
+	img
+		width auto !important
+.savecurso
+	background rgba(144, 241, 20, 0.4)
+.eliminararch
+	border-radius 20px
+	width 15px
+	height 15px
+	background-color #f00
+	display inline-block
+	box-sizing border-box
+	font-size 10px
+	color #FFF
+	text-decoration none
+	line-height 15px
+	padding 0px 0px 0px 5px
+// Asistencia
+.mrgsede
+	padding: 10px
+	background-color: #eee
+	border: 5px solid #FFF
+	text-align: center
+	font-weight: bold
+	cursor: pointer
+.btnma
+	border-radius 30px
+	display inline-block
+	font-size 30px
+	line-height 15px
+	padding 10px
+	text-decoration none
+	transition background-color 0.5s ease
+	color #FFF
+.activo
+	background-color green
+.desactivado
+	background-color gray
+.apagarasistencia
+	text-align: center
+.asistencia
+	color: #2965B1
+	background-color: #fff
+	max-width: 500px
+	margin: 0px auto
+	padding: 20px
+	border-radius: 20px
+	top: 35%
+	position: absolute
+	left: 0px
+	right: 0px
+	label
+		display: inline-block
+	input[type="text"]
+		background-color: #fff
+		border: 1px solid #999
+		-webkit-border-radius: 10px
+		border-radius: 10px
+		font 16px/30px 'Maven Pro',sans-serif
+		height: 30px
+		padding: 2px 10px
+		width: 250px
+		outline: 0
+		box-sizing: border-box
+@import "keyframess.styl"
+@media all and (max-height: 500px)
+	.centro_login
+		margin 25px auto
+	.pie_login
+		position: relative
+	.izquierdo, .derecho
+		display block
+		text-align center
+		float none
+		margin 0px
+@media all and (max-width: 777px)
+	.componentes
+		display block
+		width 100%
+	#mostrarmodulos
+		display block !important
+		float right
+		text-decoration none
+		color #3b8ebd
+	.mostrarc
+		width 100%
+// @media all and (max-width: 1000px)
+// 	.contenido
+// 		width 100%
+// @media all and (min-width: 999px)
+// 	.contenido
+// 		max-width 100%
