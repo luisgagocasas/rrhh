@@ -33,7 +33,7 @@ if($_POST['tipo']=="crear"){
         return false;
     });
     </script>
-    <div class=\"jo animated bounceInDown\" style=\"width: 380px;margin-left: -215px;\">
+    <div class=\"jo animated bounceInDown\" style=\"width: 380px;\">
         <div class=\"cerrar\">x</div>
         <span class=\"texto\"><br>
             <center><h2>Se guardo correctamente.</h2></center>";
@@ -64,7 +64,7 @@ if($_POST['tipo']=="editar"){
         return false;
     });
     </script>
-    <div class=\"jo animated bounceInDown\" style=\"width: 380px;margin-left: -215px;\">
+    <div class=\"jo animated bounceInDown\" style=\"width: 380px;\">
         <div class=\"cerrar\">x</div>
         <span class=\"texto\"><br>
             <center><h2>Se guardo correctamente.</h2></center>";
@@ -96,7 +96,7 @@ if($_GET['tipo']=="borrararchivo"){
         return false;
     });
     </script>
-    <div class=\"jo animated bounceInDown\" style=\"width: 380px;margin-left: -215px;\">
+    <div class=\"jo animated bounceInDown\" style=\"width: 380px;\">
         <div class=\"cerrar\">x</div>
         <span class=\"texto\"><br>
             <center><h2>Se borro correctamente.</h2></center>

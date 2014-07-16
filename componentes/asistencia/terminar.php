@@ -15,7 +15,7 @@ $respuesta = new stdClass();
         return false;
     });
     </script>
-    <div class=\"jo animated bounceInDown\" style=\"width: 450px;margin-left: -215px;\">
+    <div class=\"jo animated bounceInDown\" style=\"width: 450px;\">
         <div class=\"cerrar\">x</div>
         <span class=\"texto\">
             <center>

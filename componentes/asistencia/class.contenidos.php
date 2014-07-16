@@ -19,7 +19,7 @@ class Asistencia{
 				echo "<span id=\"sede\">sede</span></br>";
 				echo "<div class=\"btnma activo\">".Asistencia::verquesede($_COOKIE["sedea"])."</div>";
 				echo "<div class=\"apagarasistencia\">
-				está Activo</br>¿Desea Cerrar Sesión?</br><span class=\"btnm\" id=\"terminar\">Si</span>
+				está Activo</br><span class=\"btnm\" style=\"background: #f00; width: auto\" id=\"terminar\">Cerrar esta sesión de Asistencia</span>
 				</div>";
 			}
 			else {

@@ -45,7 +45,7 @@ $rows = mysql_num_rows($respuser);
         return false;
     });
     </script>
-    <div class=\"jo animated bounceInDown\" style=\"width: 380px;margin-left: -215px;\">
+    <div class=\"jo animated bounceInDown\" style=\"width: 380px;\">
         <div class=\"cerrar\">x</div>
         <span class=\"texto\">
             <center><h2>".$mmensaje."</h2></center>
