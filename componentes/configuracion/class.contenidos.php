@@ -1,46 +1,52 @@
 <?php
 class Configuracion{
-	function inicio(){
-		if (!isset($_POST['nombreapp'])) { $config = new LagcConfig(); ?>
+	function inicio(){ ?>
+		<div class="tlcabecera">
+			<a href="?lagc=configuracion" title="Lista de Cursos" class="menucompo">
+				<img src="plantillas/default/img/lista.png"><b>Configuración</b></a>
+		</div>
+		<?php
+		$respconfig = mysql_query("select * from configuracion"); $config = mysql_fetch_array($respconfig);
+		if (!isset($_POST['nombreapp'])) { ?>
 			<form action="" enctype="multipart/form-data" method="post" class="frm_validate">
 				<div class="grid grid-pad">
 					<div class="col-1-2">
 						<div class="form_control">
-							<label for="correo">Correo</label>
-							<input type="email" name="correo" id="correo" required placeholder="Ingrese el correo" value="<?=$config->lagcmail; ?>">
+							<label for="nombre">Nombre de la APP</label>
+							<input type="text" name="nombreapp" id="nombre" required placeholder="Ingrese el nombre" value="<?=$config['nombreapp']; ?>">
 						</div>
 						<div class="form_control">
-							<label for="nombre">Nombre de la APP</label>
-							<input type="text" name="nombreapp" id="nombre" required placeholder="Ingrese el nombre" value="<?=$config->lagcnombre; ?>">
+							<label for="correo">Correo</label>
+							<input type="email" name="correo" id="correo" required placeholder="Ingrese el correo" value="<?=$config['correo']; ?>">
 						</div>
 						<div class="form_control">
 							<label for="direccion">Dirección</label>
-							<input type="text" name="direccion" id="direccion" placeholder="Ingrese la dirección" value="<?=$config->lagcdireccion; ?>">
+							<input type="text" name="direccion" id="direccion" placeholder="Ingrese la dirección" value="<?=$config['direccion']; ?>">
 						</div>
 						<div class="form_control">
 							<label for="telefono">Telefonos</label>
-							<input type="text" name="telefono" id="telefono" placeholder="Ingrese el telefono" value="<?=$config->lagctelefono; ?>">
+							<input type="text" name="telefono" id="telefono" placeholder="Ingrese el telefono" value="<?=$config['telefono']; ?>">
 						</div>
 						<div class="form_control">
 							<label for="ruc">Ruc</label>
-							<input type="text" name="ruc" id="ruc" placeholder="Ingrese el ruc" value="<?=$config->lagcruc; ?>">
+							<input type="text" name="ruc" id="ruc" placeholder="Ingrese el ruc" value="<?=$config['ruc']; ?>">
 						</div>
 						<div class="form_control">
 							<label for="logo">Logo</label>
 							<input type="file" name="archivo" id="logo">
 							<?php
-							if(!empty($config->lagclogo)){
-								echo "<div style=\"float:left\"><img src=\"utilidades/imagenes/".$config->lagclogo."\"></div>";
+							if(!empty($config['logo'])){
+								echo "<center><img src=\"utilidades/imagenes/".$config['logo']."\"></center>";
 							}
 							?>
 						</div>
-					</div>
-					<div class="col-1-2">
 						<div class="form_control">
 				            <center>
-				                <button type="submit" id="sbmSend" title="Enviar" class="btn">Guardar</button>
+				                <button type="submit" id="sbmSend" title="Enviar" style="margin: 30px 0px 0px 0px" class="btn">Guardar</button>
 				            </center>
 			        	</div>
+					</div>
+					<div class="col-1-2">
 			        </div>
 				</div>
 			</form>
@@ -62,35 +68,14 @@ class Configuracion{
 					move_uploaded_file($_FILES['archivo']['tmp_name'],$fotoruta.$nombreft);
 				}
 			}
-			else { $nombreft = $config->lagclogo; }
-			// El contenido del archivo
-			$archi = "<?php\n";
-			$archi .= "class LagcConfig {\n";
-			$archi .= "    //Datos del Sitio\n";
-			$archi .= "    var \$lagcnombre = '".$_POST['nombreapp']."';\n";
-			$archi .= "    var \$lagcmail = '".$_POST['correo']."';\n";
-			$archi .= "    var \$lagcurl = '".$_POST['url']."';\n";
-			$archi .= "    var \$lagcdireccion = '".$_POST['direccion']."';\n";
-			$archi .= "    var \$lagctelefono = '".$_POST['telefono']."';\n";
-			$archi .= "    var \$lagcruc = '".$_POST['ruc']."';\n";
-			$archi .= "    var \$lagclogo = '".$nombreft."';\n";
-			$archi .= "    \n";
-			$archi .= "    //Mysql\n";
-			$archi .= "    var \$lagclocal = '".$_POST['servidor']."';\n";
-			$archi .= "    var \$lagcbd = '".$_POST['nombrebd']."';\n";
-			$archi .= "    var \$lagcuser = '".$_POST['usuario']."';\n";
-			$archi .= "    var \$lagcpass = '".$_POST['password']."';\n";
-			$archi .= "    \n";
-			$archi .= "    var \$lagccompopri = '2';\n";
-			$archi .= "    \n";
-			$archi .= "    //Plantillas\n";
-			$archi .= "    var \$lagctemplsite = 'default';\n";
-			$archi .= "}\n";
-			$archi .= "\$config = new LagcConfig();\n";
-			$archi .= "\$con = mysql_connect(\$config->lagclocal,\$config->lagcuser,\$config->lagcpass);\n";
-			$archi .= "mysql_select_db(\$config->lagcbd,\$con) or die(\"<center>No hay conexion.</center>\");\n";
-			$archi .= "mysql_set_charset('utf8');\n";
-			$archi .= "?>";
+			else { $nombreft = $config['logo']; }
+			$config = new LagcConfig(); //Conexion
+			$con = mysql_connect($config->lagclocal,$config->lagcuser,$config->lagcpass);
+			mysql_select_db($config->lagcbd,$con);
+			$sql = "UPDATE configuracion SET nombreapp='".$_POST['nombreapp']."', correo='".$_POST['correo']."', direccion='".$_POST['direccion']."', telefono='".$_POST['telefono']."', ruc='".$_POST['ruc']."', logo='".$nombreft."'";
+			$Query = mysql_query ($sql, $con) or die ("Error: <b>" . mysql_error() . "</b>");
+			mysql_close($con);
+			echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=configuracion'\", 1500) </script></br></br><center><h4>Se guardo correctamente.</h4></center>";
 		}
 	}
 }
