@@ -13,7 +13,7 @@
 	<div id="pagina">
 		<header class="cabecera" id="flotar">
 			<figure class="logo">
-				<a href="<?=$config->lagcurl; ?>" title="Plataforma Educativa">
+				<a href="<?=$config->lagcurl; ?>" title="<?=$config->lagcnombre; ?>">
 					<img src="plantillas/default/img/logo-rrhh.png" />
 				</a>
 			</figure>
