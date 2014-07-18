@@ -35,7 +35,7 @@ class Reporte{
 	static function reportesedes($val1, $val2){
 		$respconfig = mysql_query("select * from configuracion"); $config = mysql_fetch_array($respconfig);
 		$respsedes = mysql_query("select * from com_sedes where sede_id='".$val1."'"); $sedes = mysql_fetch_array($respsedes);
-		$respcursos = mysql_query("select * from com_cursos where curso_id='".$sedes['id']."'"); $cursos = mysql_fetch_array($respcursos); ?> ?>
+		$respcursos = mysql_query("select * from com_cursos where curso_id='".$sedes['ids']."'"); $cursos = mysql_fetch_array($respcursos); ?> ?>
 		<div class="tlcabecera">
 			<a href="?lagc=reporte" title="Lista de Cursos" class="menucompo">
 				<img src="plantillas/default/img/lista.png"><b>Sedes y Cursos</b></a>
