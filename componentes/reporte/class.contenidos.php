@@ -33,7 +33,8 @@ class Reporte{
         }
 	}
 	static function reportecurso($val1, $val2){
-		$respconfig = mysql_query("select * from configuracion"); $config = mysql_fetch_array($respconfig); ?>
+		$respconfig = mysql_query("select * from configuracion"); $config = mysql_fetch_array($respconfig);
+		$respcursos = mysql_query("select * from com_cursos where curso_id='".$_GET['id']."'"); $cursos = mysql_fetch_array($respcursos); ?>
 		<div class="tlcabecera">
 			<a href="?lagc=reporte" title="Lista de Cursos" class="menucompo">
 				<img src="plantillas/default/img/lista.png"><b>Sedes y Cursos</b></a>
@@ -42,7 +43,7 @@ class Reporte{
 			<a href="?lagc=reporte&id=seguros" title="Seguros" class="menucompo">
 				<img src="plantillas/default/img/lista.png">Seguros</a>
 		</div>
-		<div style="text-align: right;"><a href="#">Exportar</a></div>
+		<div style="text-align: right;"><a href="componentes/reporte/exportar.php?idcurso=<?=$_GET['id']; ?>&sede=<?=Reporte::nombresede($cursos['sede_id']); ?>&curso=<?=$cursos['curso_nombre']; ?>">Exportar</a></div>
 		<div class="grid grid-pad">
 		    <div class="col-1-4">
 		    	<img src="utilidades/imagenes/<?=$config['logo']; ?>" class="imgrepor">
@@ -57,7 +58,6 @@ class Reporte{
 
 		    </div>
 		</div>
-		<?php $respcursos = mysql_query("select * from com_cursos where curso_id='".$_GET['id']."'"); $cursos = mysql_fetch_array($respcursos); ?>
 		<div class="grid grid-pad">
 		    <div class="col-1-4 rptasunto" style="text-align: right;">
 		    	SEDE:
