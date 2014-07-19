@@ -58,6 +58,32 @@ else if($_GET['que']=="sede"){
 		}
 	}
 }
+else if($_GET['que']=="examen"){
+		$salida_cvs = "Sede:,".$_GET['sede'].",";
+		$salida_cvs .= "\n";
+		$salida_cvs .= utf8_decode("Exámen").":".",".$_GET['examen'].",";
+		$salida_cvs .= "\n";
+	$respasig = mysql_query("SELECT * from com_examen_asignar where id_examen=".$_GET['idexamen']."");
+	$usuarios = mysql_query('select * from usuarios');
+		$salida_cvs .= mysql_field_name($usuarios, 12).",";
+		$salida_cvs .= mysql_field_name($usuarios, 4).",";
+		$salida_cvs .= mysql_field_name($usuarios, 5).",";
+		$salida_cvs .= mysql_field_name($usuarios, 6).",";
+		$salida_cvs .= mysql_field_name($respasig, 3).",";
+		$salida_cvs .= mysql_field_name($respasig, 4)."";
+		$salida_cvs .= "\n";
+	while($asigexamen = mysql_fetch_array($respasig)){
+		$user = mysql_query("SELECT * FROM usuarios where id=".$asigexamen['id_usuario']."");
+		$rowr = mysql_fetch_array($user);
+		$salida_cvs .= $rowr['dni'].", ";
+		$salida_cvs .= utf8_decode($rowr['nombres']).", ";
+		$salida_cvs .= utf8_decode($rowr['apellidop']).", ";
+		$salida_cvs .= utf8_decode($rowr['apellidom']).", ";
+		$salida_cvs .= $asigexamen['fechainicio'].", ";
+		$salida_cvs .= $asigexamen['fechafin']."";
+		$salida_cvs .= "\n";
+	}
+}
 
 header("Content-type: application/vnd.ms-excel; charset=UTF-8");
 header("Content-disposition: csv".date("Y-m-d:")."_".LGlobal::Url_Amigable($config->lagcnombre).".csv");
