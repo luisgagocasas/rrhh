@@ -9,6 +9,7 @@ function verquesede($val1){
 	if($sede['sede_id']==$val1){ $final = $sede['sede_nombre']; }
 	return $final;
 }
+$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,12 +33,13 @@ function verquesede($val1){
 	<div id="pagina"><br><br><br><br>
 		<div class="asistencia">
 			<center>
-				<h2>Sistencia del <u><?=date("d"); ?></u> de Julio de <?=date("Y"); ?></h2>
+			<h1>SEDE: <?=verquesede($_COOKIE["sedea"]); ?></h1>
+				<h2>Sistencia del <u><?=date("d"); ?></u> de <?=$meses[date('n')-1]; ?> de <?=date("Y"); ?></h2>
 				<form method="post" class="frm_validate" style="width: 320px" id="frmcheck">
 				    <input type="hidden" name="sede" value="<?=verquesede($_COOKIE["sedea"]); ?>">
 				    <label for="entrada"><input name="ensa" id="entrada" type="radio" checked value="Entrada" />Entrada</label>
 				    <label for="salida"><input name="ensa" id="salida" type="radio" value="Salida" /> Salida</label>
-				    <input type="text" name="dni" id="dni" required placeholder="DNI">
+				    <input type="text" name="dni" id="dni" autocomplete="off" required placeholder="DNI o Código">
 				</form>
 			</center>
 		</div>

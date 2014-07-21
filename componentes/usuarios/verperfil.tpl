@@ -14,6 +14,7 @@
             <li class="listap"><span>Nombre:</span> <?=$cont['nombres']; ?></li>
             <li class="listap"><span>Apellidos:</span> <?=$cont['apellidop']." ".$cont['apellidom']; ?></li>
             <li class="listap"><span>Email:</span> <?=$cont['email']; ?></li>
+            <li class="listap"><span>Código:</span> <?=$cont['codigo']; ?></li>
             <li class="listap"><span>Género:</span> <?php if($cont['genero']==1){ echo "Masculino"; } else { echo "Femenino";} ?></li>
             <li class="listap"><span>DNI:</span> <?=$cont['dni']; ?></li>
             <li class="listap"><span>Departamento:</span>

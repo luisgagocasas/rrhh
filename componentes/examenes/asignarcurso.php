@@ -32,7 +32,7 @@ $respuesta->mensaje = '
         return false;
     });
     </script>
-    <div class="ja animated bounceInDown">
+    <div class="ja animated bounceInDown" style="width: 70%;">
         <div class="cerrar">x</div>
         <div class="texto">
         <center><h2>'.$user["apellidop"].' '.$user["apellidom"].' '.$user["nombres"].'</h2></center>

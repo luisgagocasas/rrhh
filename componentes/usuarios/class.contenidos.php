@@ -116,7 +116,7 @@ class Usuarios{
 				$ausuario = "usuario='".$_POST['usuario']."', ";
 			}
 			/* */
-			$sql = "UPDATE usuarios SET $apassword $ausuario nombres='".$_POST['nombres']."', apellidop='".$_POST['apellidop']."', apellidom='".$_POST['apellidom']."', permisos='".$_POST['permisos']."', imagen='".$nombreft."', dni='".$_POST['dni']."', cargo='".$_POST['cargo']."', fechanacimiento='".$_POST['cumpleanios']."', departamento='".$_POST['departamento']."', celular='".$_POST['cel']."', fechaingresoempresa='".$_POST['fempresa']."', gsanguineo='".$_POST['gsanguineo']."', estado='".$_POST['estado']."', genero='".$_POST['radGener']."', modificadoel='".time()."', comentario='".$_POST['comentario']."', sede_id='".$sedes."' WHERE id='".$id."'";
+			$sql = "UPDATE usuarios SET $apassword $ausuario nombres='".$_POST['nombres']."', apellidop='".$_POST['apellidop']."', apellidom='".$_POST['apellidom']."', permisos='".$_POST['permisos']."', imagen='".$nombreft."', dni='".$_POST['dni']."', codigo='".$_POST['codigo']."', cargo='".$_POST['cargo']."', fechanacimiento='".$_POST['cumpleanios']."', departamento='".$_POST['departamento']."', celular='".$_POST['cel']."', fechaingresoempresa='".$_POST['fempresa']."', gsanguineo='".$_POST['gsanguineo']."', estado='".$_POST['estado']."', genero='".$_POST['radGener']."', modificadoel='".time()."', comentario='".$_POST['comentario']."', sede_id='".$sedes."' WHERE id='".$id."'";
 			$Query = mysql_query ($sql, $con) or die ("Error: <b>" . mysql_error() . "</b>");
 			mysql_close($con);
 			echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=usuarios'\", 1500) </script>
@@ -396,13 +396,15 @@ class Usuarios{
 			    //loop through the csv file and insert into database
 			    do {
 			        if ($data[0]) {
-			        	$nuevo_usuario=mysql_query("select dni from usuarios where dni='".$data[3]."'");
+			        	$nuevo_usuario=mysql_query("select dni from usuarios where dni='".$data[3]."' or codigo='".$data[4]."'");
 			        	if(mysql_num_rows($nuevo_usuario)>0) {
 							echo "<p><b>DNI Duplicado</b> ".addslashes($data[0])." ".addslashes($data[1])." ".addslashes($data[2])." - ".addslashes($data[3])."</p>";
 						}
 						else {
-				            mysql_query("INSERT INTO usuarios (apellidop, apellidom, nombres, dni, cargo, fechanacimiento, fechaingresoempresa, email, celular, gsanguineo, creadoel, ascreated, genero) VALUES
+				            mysql_query("INSERT INTO usuarios (usuario, password, apellidop, apellidom, nombres, dni, codigo, cargo, fechanacimiento, fechaingresoempresa, email, celular, gsanguineo, creadoel, ascreated, genero) VALUES
 				                (
+				                	'".addslashes($data[4])."',
+				                	'".addslashes(md5($data[4]))."',
 				                    '".addslashes($data[0])."',
 				                    '".addslashes($data[1])."',
 				                    '".addslashes($data[2])."',
@@ -413,6 +415,7 @@ class Usuarios{
 				                    '".addslashes($data[7])."',
 				                    '".addslashes($data[8])."',
 				                    '".addslashes($data[9])."',
+				                    '".addslashes($data[10])."',
 				                    '".time()."',
 				                    '1',
 				                    '1'
@@ -423,7 +426,6 @@ class Usuarios{
 			    } while ($data = fgetcsv($handle,1000,",","'"));
 			    echo "<br/><br/><center>Se importo correctamente.</center>";
 			}
-
 		}
 	}
 	static function nuevo(){ ?>
@@ -440,10 +442,10 @@ class Usuarios{
 			include "nuevo.tpl";
 		}
 		else {
-			$nuevo_usuario=mysql_query("select dni from usuarios where dni='".$_POST['dni']."'");
+			$nuevo_usuario=mysql_query("select dni from usuarios where dni='".$_POST['dni']."' or codigo='".$_POST['codigo']."'");
 			if(mysql_num_rows($nuevo_usuario)>0)  {
-				echo "<p>El DNI ya esta registrado</p>
-				<p><a href='javascript:history.go(-1)' class='clase1'>Volver atrás</a></p>";
+				echo "<p>El DNI o el Código ya esta registrado</p>
+				<p><a href='javascript:history.go(-1)'>Volver atrás</a></p>";
 			}
 			else {
 				$config = new LagcConfig(); //Conexion
@@ -473,7 +475,14 @@ class Usuarios{
 					}
 				}
 				else { $nombreft = ""; }
-				$sql = "INSERT INTO usuarios (usuario, password, email, nombres, apellidop, apellidom, permisos, dni, cargo, fechanacimiento, departamento, celular, fechaingresoempresa, gsanguineo, estado, genero, creadoel, ascreated, comentario, imagen, sede_id) VALUES ('".$_POST['usuario']."', '".md5($_POST['password'])."', '".$_POST['email']."', '".$_POST['nombres']."', '".$_POST['apellidop']."', '".$_POST['apellidom']."', '".$_POST['permisos']."', '".$_POST['dni']."', '".$_POST['cargo']."', '".$_POST['cumpleanios']."', '".$_POST['departamento']."', '".$_POST['cel']."', '".$_POST['fempresa']."', '".$_POST['gsanguineo']."', '".$_POST['estado']."', '".$_POST['radGener']."', '".time()."', '0', '".$_POST['comentario']."', '".$nombreft."', '".$sedes."')";
+				if($_POST['permisos']=="4"){
+					if(empty($_POST['password'])){ $pashay = $_POST['dni']; }
+					else { $pashay = $_POST['password']; }
+					$sql = "INSERT INTO usuarios (usuario, password, email, nombres, apellidop, apellidom, permisos, dni, codigo, cargo, fechanacimiento, departamento, celular, fechaingresoempresa, gsanguineo, estado, genero, creadoel, ascreated, comentario, imagen, sede_id) VALUES ('".$_POST['dni']."', '".md5($pashay)."', '".$_POST['email']."', '".$_POST['nombres']."', '".$_POST['apellidop']."', '".$_POST['apellidom']."', '".$_POST['permisos']."', '".$_POST['dni']."', '".$_POST['codigo']."', '".$_POST['cargo']."', '".$_POST['cumpleanios']."', '".$_POST['departamento']."', '".$_POST['cel']."', '".$_POST['fempresa']."', '".$_POST['gsanguineo']."', '".$_POST['estado']."', '".$_POST['radGener']."', '".time()."', '0', '".$_POST['comentario']."', '".$nombreft."', '".$sedes."')";
+				}
+				else {
+					$sql = "INSERT INTO usuarios (usuario, password, email, nombres, apellidop, apellidom, permisos, dni, codigo, cargo, fechanacimiento, departamento, celular, fechaingresoempresa, gsanguineo, estado, genero, creadoel, ascreated, comentario, imagen, sede_id) VALUES ('".$_POST['usuario']."', '".md5($_POST['password'])."', '".$_POST['email']."', '".$_POST['nombres']."', '".$_POST['apellidop']."', '".$_POST['apellidom']."', '".$_POST['permisos']."', '".$_POST['dni']."', '".$_POST['codigo']."', '".$_POST['cargo']."', '".$_POST['cumpleanios']."', '".$_POST['departamento']."', '".$_POST['cel']."', '".$_POST['fempresa']."', '".$_POST['gsanguineo']."', '".$_POST['estado']."', '".$_POST['radGener']."', '".time()."', '0', '".$_POST['comentario']."', '".$nombreft."', '".$sedes."')";
+				}
 				mysql_query($sql,$con);
 				echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=usuarios'\", 1000) </script><br><br><center><h3>".$_POST['nombres']." ".$_POST['apellidop'].$_POST['apellidom'].".<br>Se guardo correctamente.</h3></center>";
 			}

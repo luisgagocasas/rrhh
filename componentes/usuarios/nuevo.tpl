@@ -20,6 +20,10 @@
             <input type="email" name="email" id="txtEmail" placeholder="Ingrese su Correo Electrónico">
         </div>
         <div class="form_control">
+            <label for="txtcodigo">Código</label>
+            <input type="text" name="codigo" id="txtcodigo" placeholder="Ingrese su codigo">
+        </div>
+        <div class="form_control">
             <label>Género</label>
             <div class="iopinline">
                 <label for="radGener1" class="ioption">
@@ -117,11 +121,11 @@
         <blockquote>
             <div class="form_control" id="m1" style="display:none;">
                 <label for="txtuser">Usuario</label>
-                <input type="tel" name="usuario" id="txtuser" placeholder="Usuario">
+                <input type="text" name="usuario" id="txtuser" placeholder="Usuario">
             </div>
             <div class="form_control" id="m2" style="display:none;">
                 <label for="txtpass">Contraseña</label>
-                <input type="tel" name="password" id="txtpass" placeholder="Contraseña">
+                <input type="password" name="password" id="txtpass" placeholder="Contraseña">
             </div>
         </blockquote>
         <div class="form_control">

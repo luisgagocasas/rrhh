@@ -30,6 +30,10 @@
             <input type="email" name="email" id="txtEmail" placeholder="Ingrese su Correo Electrónico" value="<?=$cont['email']; ?>">
         </div>
         <div class="form_control">
+            <label for="txtcodigo">Código</label>
+            <input type="text" name="codigo" id="txtcodigo" placeholder="Ingrese el código" value="<?=$cont['codigo']; ?>">
+        </div>
+        <div class="form_control">
             <label>Género</label>
             <div class="iopinline">
                 <label for="radGener1" class="ioption">
@@ -139,13 +143,13 @@
             </select>
         </div>
         <blockquote>
-            <div class="form_control" id="m1"<?php if($cont['permisos']=="4"){ echo " style=\"display:none;\""; } ?>>
+            <div class="form_control" id="m1">
                 <label for="txtuser">Usuario</label>
-                <input type="tel" name="usuario" id="txtuser" placeholder="Usuario"<?php if(!empty($cont['usuario'])){ echo " disabled readonly=\"readonly\""; } ?> value="<?=$cont['usuario']; ?>">
+                <input type="text" name="usuario" id="txtuser" placeholder="Usuario"<?php if(!empty($cont['usuario'])){ echo " disabled readonly=\"readonly\""; } ?> value="<?=$cont['usuario']; ?>">
             </div>
-            <div class="form_control" id="m2"<?php if($cont['permisos']=="4"){ echo " style=\"display:none;\""; } ?>>
+            <div class="form_control" id="m2">
                 <label for="txtpass">Contraseña</label>
-                <input type="tel" name="password" id="txtpass" placeholder="Contraseña">
+                <input type="password" name="password" id="txtpass" placeholder="Contraseña">
             </div>
         </blockquote>
         <div class="form_control">

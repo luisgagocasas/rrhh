@@ -75,7 +75,7 @@ class Examenes{
 	            <li>Nombre</li>
 	            <li>Apellidos</li>
 	            <li>Estado</li>
-	            <li style="width: 35%">Cursos Asignados</li>
+	            <li style="width: 35%">Exámenes Asignados</li>
 	        </ul>
 	        <?php
 	        while($cont = mysql_fetch_array($result)){
@@ -110,7 +110,7 @@ class Examenes{
 		</br>
 		<?php $respcont = mysql_query("select * from com_examen_asignar where id_examen='".$id."'");
 		$rows = mysql_num_rows($respcont);  ?>
-		<h2>Participantes del Curso: <u><?=$_GET['participantes']; ?></u> (<?=$rows; ?>)</h2></br>
+		<h2>Participantes del Exámen: <u><?=$_GET['participantes']; ?></u> (<?=$rows; ?>)</h2></br>
     	<?php
 		while($cont = mysql_fetch_array($respcont)){
     		$respuser = mysql_query("select * from usuarios where id='".$cont['id_usuario']."'"); $user = mysql_fetch_array($respuser);

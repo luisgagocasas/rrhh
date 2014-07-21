@@ -44,15 +44,27 @@
                         </ul>
                     </li>
                     <?php } ?>
+                    <?php
+                    if(Componente::permisos($_COOKIE["user"], "1", "2", "3", "")){
+                    ?>
                     <li>
 						<a href="?lagc=asistencia">Asistencia</a>
                     </li>
+                    <?php } ?>
+                    <?php
+                    if(Componente::permisos($_COOKIE["user"], "1", "2", "", "")){
+                    ?>
                     <li>
                     	<a href="?lagc=reporte">Reportes</a>
                     </li>
+                    <?php } ?>
+                    <?php
+                    if(Componente::permisos($_COOKIE["user"], "1", "", "", "")){
+                    ?>
                     <li>
                     	<a href="?lagc=configuracion">Configuración</a>
                     </li>
+                    <?php } ?>
                 </ul>
             </nav>
 		</header>
