@@ -119,11 +119,11 @@
             </select>
         </div>
         <blockquote>
-            <div class="form_control" id="m1" style="display:none;">
+            <div class="form_control" id="m1">
                 <label for="txtuser">Usuario</label>
                 <input type="text" name="usuario" id="txtuser" placeholder="Usuario">
             </div>
-            <div class="form_control" id="m2" style="display:none;">
+            <div class="form_control" id="m2">
                 <label for="txtpass">Contraseña</label>
                 <input type="password" name="password" id="txtpass" placeholder="Contraseña">
             </div>

@@ -1,17 +1,22 @@
 <?php
 include "../../config.php"; include "../../funciones/function.globales.php";
-$result = mysql_query("SHOW COLUMNS FROM com_asistencia");
-$i = 0;
-if (mysql_num_rows($result) > 0) {
-	while ($row = mysql_fetch_assoc($result)) {
-		$i++;
-	}
-}
-$values = mysql_query("SELECT apellidop,apellidom,nombre,dni,ensa,sede FROM com_asistencia ORDER BY fecha ASC");
-while ($rowr = mysql_fetch_row($values)) {
-	for ($j=0;$j<$i;$j++) {
-		$salida_cvs .= $rowr[$j].", ";
-	}
+$respasig = mysql_query("SELECT * from com_asistencia");
+$salida_cvs .= mysql_field_name($respasig, 2).",";
+$salida_cvs .= mysql_field_name($respasig, 3).",";
+$salida_cvs .= mysql_field_name($respasig, 4).",";
+$salida_cvs .= mysql_field_name($respasig, 5).",";
+$salida_cvs .= mysql_field_name($respasig, 6).",";
+$salida_cvs .= mysql_field_name($respasig, 7).",";
+$salida_cvs .= mysql_field_name($respasig, 8)."";
+$salida_cvs .= "\n";
+while($asistencia = mysql_fetch_array($respasig)){
+	$salida_cvs .= utf8_decode($asistencia['apellidop']).",";
+	$salida_cvs .= utf8_decode($asistencia['apellidom']).",";
+	$salida_cvs .= utf8_decode($asistencia['nombre']).",";
+	$salida_cvs .= utf8_decode($asistencia['dni']).",";
+	$salida_cvs .= utf8_decode($asistencia['ensa']).",";
+	$salida_cvs .= utf8_decode($asistencia['sede']).",";
+	$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
 	$salida_cvs .= "\n";
 }
 

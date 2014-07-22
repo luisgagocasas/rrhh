@@ -1,6 +1,13 @@
 <?php
 class Configuracion{
-	function inicio(){
+	function inicio(){ ?>
+		<div class="tlcabecera">
+			<a href="?lagc=configuracion" title="Configuración del sitio" class="menucompo">
+				<img src="plantillas/default/img/lista.png"><b>Configuración</b></a>
+			<a href="?lagc=configuracion&id=permisos" title="Ver Permisos" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Permisos</a>
+		</div>
+		<?php
 		$respconfig = mysql_query("select * from configuracion"); $config = mysql_fetch_array($respconfig);
 		if (!isset($_POST['nombreapp'])) { ?>
 			<form action="" enctype="multipart/form-data" method="post" class="frm_validate">

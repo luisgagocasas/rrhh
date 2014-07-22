@@ -2,7 +2,7 @@
 class Login {
     public function Logon($user,$password,$id=false) {
         $user = strtolower(trim($user));
-        if (!ereg("^[a-z]+$",$user)) {
+        if (!ereg("^[a-zA-Z0-9' ]{1,255}$",$user)) {
             return false;
         }
         if ($id===false) {
@@ -10,7 +10,7 @@ class Login {
             $sql = mysql_query("SELECT usuario,password,id,email,nombres,apellidop,permisos FROM usuarios WHERE usuario = '$user' AND password = '$password'");
         }
         else {
-            if (!ereg("^[0-9]+$",$id)) {
+            if (!ereg("^[a-zA-Z0-9' ]{1,255}$",$id)) {
                 $id = 0;
             }
             $password = mysql_real_escape_string($password);

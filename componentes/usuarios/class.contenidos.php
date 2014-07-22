@@ -443,7 +443,7 @@ class Usuarios{
 		}
 		else {
 			$nuevo_usuario=mysql_query("select dni from usuarios where dni='".$_POST['dni']."' or codigo='".$_POST['codigo']."'");
-			if(mysql_num_rows($nuevo_usuario)>0)  {
+			if(mysql_num_rows($nuevo_usuario)>0 and !empty($_POST['codigo']))  {
 				echo "<p>El DNI o el Código ya esta registrado</p>
 				<p><a href='javascript:history.go(-1)'>Volver atrás</a></p>";
 			}
