@@ -115,7 +115,7 @@
             <?php
                 $respperm = mysql_query("select * from permisos ORDER BY nombre DESC");
                 while($permisos = mysql_fetch_array($respperm)){
-                    echo "<option value=\"".$permisos['id']."\" title=\"".$permisos['nivel']."\">".$permisos['nombre']."</option>";
+                    echo "<option title=\"".$permisos['nivel']."\" value=\"".$permisos['id']."\">".$permisos['nombre']."</option>";
                 }
             ?>
             </select>

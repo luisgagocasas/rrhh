@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    $("select#txtpermisos").on('change',function(){
-        if($(this).attr('title')!="4"){
+    $("#txtpermisos").change(function(){
+        if($(this).find("option:selected").attr("title")!="4"){
             $("#m1").css({"display":"block"});
             $("#m2").css({"display":"block"});
         }else{
