@@ -192,10 +192,10 @@ class Configuracion{
 		} else { echo "<br><center><h3>No existe el contenido</h3></center>"; }
 	}
 	static function nombrenivel($val){
-		if($val==1){ $fin = "Administrador"; }
-		else if($val==2){ $fin = "Supervisor"; }
-		else if($val==3){ $fin = "Asistencia"; }
-		else if($val==4){ $fin = "Trabajador"; }
+		if($val==1){ $fin = "Nivel 1"; }
+		else if($val==2){ $fin = "Nivel 2"; }
+		else if($val==3){ $fin = "Nivel 3"; }
+		else if($val==4){ $fin = "Nivel 4"; }
 		return $fin;
 	}
 }

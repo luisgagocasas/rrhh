@@ -112,18 +112,20 @@
         <div class="form_control">
             <label for="txtpermisos"><u>Permisos</u></label>
             <select name="permisos" id="txtpermisos">
-                <option value="1">Administrador</option>
-                <option value="2">Supervisor</option>
-                <option value="3">Asistencia</option>
-                <option value="4" selected>Trabajador</option>
+            <?php
+                $respperm = mysql_query("select * from permisos ORDER BY nombre DESC");
+                while($permisos = mysql_fetch_array($respperm)){
+                    echo "<option value=\"".$permisos['id']."\" title=\"".$permisos['nivel']."\">".$permisos['nombre']."</option>";
+                }
+            ?>
             </select>
         </div>
         <blockquote>
-            <div class="form_control" id="m1">
+            <div class="form_control" id="m1" style="display:none;">
                 <label for="txtuser">Usuario</label>
-                <input type="text" name="usuario" id="txtuser" placeholder="Usuario">
+                <input type="tel" name="usuario" id="txtuser" placeholder="Usuario">
             </div>
-            <div class="form_control" id="m2">
+            <div class="form_control" id="m2" style="display:none;">
                 <label for="txtpass">Contraseña</label>
                 <input type="password" name="password" id="txtpass" placeholder="Contraseña">
             </div>

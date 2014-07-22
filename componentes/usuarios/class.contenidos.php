@@ -475,13 +475,16 @@ class Usuarios{
 					}
 				}
 				else { $nombreft = ""; }
-				if($_POST['permisos']=="4"){
+				$resppermisos = mysql_query("select * from permisos where id='".$_POST['permisos']."'");
+				$permisos = mysql_fetch_array($resppermisos);
+				$permiso = $permisos['nivel'];
+				if($permiso=="4"){
 					if(empty($_POST['password'])){ $pashay = $_POST['dni']; }
 					else { $pashay = $_POST['password']; }
-					$sql = "INSERT INTO usuarios (usuario, password, email, nombres, apellidop, apellidom, permisos, dni, codigo, cargo, fechanacimiento, departamento, celular, fechaingresoempresa, gsanguineo, estado, genero, creadoel, ascreated, comentario, imagen, sede_id) VALUES ('".$_POST['dni']."', '".md5($pashay)."', '".$_POST['email']."', '".$_POST['nombres']."', '".$_POST['apellidop']."', '".$_POST['apellidom']."', '".$_POST['permisos']."', '".$_POST['dni']."', '".$_POST['codigo']."', '".$_POST['cargo']."', '".$_POST['cumpleanios']."', '".$_POST['departamento']."', '".$_POST['cel']."', '".$_POST['fempresa']."', '".$_POST['gsanguineo']."', '".$_POST['estado']."', '".$_POST['radGener']."', '".time()."', '0', '".$_POST['comentario']."', '".$nombreft."', '".$sedes."')";
+					$sql = "INSERT INTO usuarios (usuario, password, email, nombres, apellidop, apellidom, permisos, etiquetapermiso, dni, codigo, cargo, fechanacimiento, departamento, celular, fechaingresoempresa, gsanguineo, estado, genero, creadoel, ascreated, comentario, imagen, sede_id) VALUES ('".$_POST['dni']."', '".md5($pashay)."', '".$_POST['email']."', '".$_POST['nombres']."', '".$_POST['apellidop']."', '".$_POST['apellidom']."', '".$permiso."', '".$_POST['permisos']."', '".$_POST['dni']."', '".$_POST['codigo']."', '".$_POST['cargo']."', '".$_POST['cumpleanios']."', '".$_POST['departamento']."', '".$_POST['cel']."', '".$_POST['fempresa']."', '".$_POST['gsanguineo']."', '".$_POST['estado']."', '".$_POST['radGener']."', '".time()."', '0', '".$_POST['comentario']."', '".$nombreft."', '".$sedes."')";
 				}
 				else {
-					$sql = "INSERT INTO usuarios (usuario, password, email, nombres, apellidop, apellidom, permisos, dni, codigo, cargo, fechanacimiento, departamento, celular, fechaingresoempresa, gsanguineo, estado, genero, creadoel, ascreated, comentario, imagen, sede_id) VALUES ('".$_POST['usuario']."', '".md5($_POST['password'])."', '".$_POST['email']."', '".$_POST['nombres']."', '".$_POST['apellidop']."', '".$_POST['apellidom']."', '".$_POST['permisos']."', '".$_POST['dni']."', '".$_POST['codigo']."', '".$_POST['cargo']."', '".$_POST['cumpleanios']."', '".$_POST['departamento']."', '".$_POST['cel']."', '".$_POST['fempresa']."', '".$_POST['gsanguineo']."', '".$_POST['estado']."', '".$_POST['radGener']."', '".time()."', '0', '".$_POST['comentario']."', '".$nombreft."', '".$sedes."')";
+					$sql = "INSERT INTO usuarios (usuario, password, email, nombres, apellidop, apellidom, permisos, etiquetapermiso, dni, codigo, cargo, fechanacimiento, departamento, celular, fechaingresoempresa, gsanguineo, estado, genero, creadoel, ascreated, comentario, imagen, sede_id) VALUES ('".$_POST['usuario']."', '".md5($_POST['password'])."', '".$_POST['email']."', '".$_POST['nombres']."', '".$_POST['apellidop']."', '".$_POST['apellidom']."', '".$permiso."', '".$_POST['permisos']."', '".$_POST['dni']."', '".$_POST['codigo']."', '".$_POST['cargo']."', '".$_POST['cumpleanios']."', '".$_POST['departamento']."', '".$_POST['cel']."', '".$_POST['fempresa']."', '".$_POST['gsanguineo']."', '".$_POST['estado']."', '".$_POST['radGener']."', '".time()."', '0', '".$_POST['comentario']."', '".$nombreft."', '".$sedes."')";
 				}
 				mysql_query($sql,$con);
 				echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=usuarios'\", 1000) </script><br><br><center><h3>".$_POST['nombres']." ".$_POST['apellidop'].$_POST['apellidom'].".<br>Se guardo correctamente.</h3></center>";

@@ -36,7 +36,7 @@
                 <ul class="nav">
                     <li><a href=".">Inicio</a></li>
                     <?php
-                    if(Componente::permisos($_COOKIE["user"], "1", "2", "", "")){
+                    if(Componente::permisos($_COOKIE["lgpermisos"])){
                     ?>
                     <li><a href="">Modulos</a>
                         <ul>
@@ -45,21 +45,21 @@
                     </li>
                     <?php } ?>
                     <?php
-                    if(Componente::permisos($_COOKIE["user"], "1", "2", "3", "")){
+                    if(Componente::permisos($_COOKIE["lgpermisos"])){
                     ?>
                     <li>
 						<a href="?lagc=asistencia">Asistencia</a>
                     </li>
                     <?php } ?>
                     <?php
-                    if(Componente::permisos($_COOKIE["user"], "1", "2", "", "")){
+                    if(Componente::permisos($_COOKIE["lgpermisos"])){
                     ?>
                     <li>
                     	<a href="?lagc=reporte">Reportes</a>
                     </li>
                     <?php } ?>
                     <?php
-                    if(Componente::permisos($_COOKIE["user"], "1", "", "", "")){
+                    if(Componente::permisos($_COOKIE["lgpermisos"])){
                     ?>
                     <li>
                     	<a href="?lagc=configuracion">Configuración</a>
