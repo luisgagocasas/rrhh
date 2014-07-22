@@ -103,10 +103,10 @@ class Configuracion{
 	        echo "<li>".$cont['nombre']."</li>";
 	        echo "<li>".Configuracion::nombrenivel($cont['nivel'])."</li>";
 	        echo "<li>
-	        <a href=\"?lagc=configuracion&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombre'])."\" title=\"Editar Participante\" class=\"btnopcion\">
+	        <a href=\"?lagc=configuracion&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombre'])."\" title=\"Editar Permiso\" class=\"btnopcion\">
 	        	<img src=\"plantillas/default/img/editar.png\" />
 	        </a>
-	        <a href=\"?lagc=configuracion&id=".$cont['id']."&borrar=".LGlobal::Url_Amigable($cont['nombre'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
+	        <a href=\"?lagc=configuracion&id=".$cont['id']."&borrar=".LGlobal::Url_Amigable($cont['nombre'])."\" title=\"Borrar Permiso\" class=\"btnopcion\">
 	        	<img src=\"plantillas/default/img/borrar.png\" />
 	        </a></li>";
 	        echo "</ul>";
@@ -135,19 +135,67 @@ class Configuracion{
 				<br><br><center><h3>".$_POST['nombres'].".<br>Se guardo correctamente.</h3></center>";
 		}
 	}
+	static function editar($id, $titulo){
+		if (empty($_POST['nombres'])) {
+			$respcont = mysql_query("select * from permisos where id='".$id."'"); $cont = mysql_fetch_array($respcont);
+			if (!empty($cont['id']) and $titulo==LGlobal::Url_Amigable($cont['nombre'])) {
+				include "editar.tpl";
+			} else { echo "<br><center><h3>No existe el permiso</h3></center>"; }
+		}
+		else {
+			$config = new LagcConfig(); //Conexion
+			$con = mysql_connect($config->lagclocal,$config->lagcuser,$config->lagcpass);
+			mysql_select_db($config->lagcbd,$con);
+			$sql = "UPDATE permisos SET nombre='".$_POST['nombres']."', nivel='".$_POST['niveles']."' WHERE id='".$id."'";
+			$Query = mysql_query ($sql, $con) or die ("Error: <b>" . mysql_error() . "</b>");
+			mysql_close($con);
+			echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=configuracion&id=permisos'\", 1500) </script>
+				<br><br><center><h3>".$_POST['nombres'].".</h3><h4>Se guardo correctamente.</h4></center>";
+		}
+	}
+	static function borrar($id, $titulo) { ?>
+		<div class="tlcabecera">
+			<a href="?lagc=configuracion" title="Configuración del sitio" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Configuración</a>
+			<a href="?lagc=configuracion&id=permisos" title="Ver Permisos" class="menucompo">
+				<img src="plantillas/default/img/lista.png"><b>Permisos</b></a>
+			<a href="?lagc=configuracion&id=nuevo" title="Ver Permisos" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Crear Permiso</a>
+		</div>
+    	<?php
+		$contenidos = mysql_query("select * from permisos where id='".$id."'");
+		$conte = mysql_fetch_array($contenidos);
+		if (!empty($conte['id']) and $titulo==LGlobal::Url_Amigable($conte['nombre'])) {
+			if (empty($_POST['id'])) { ?>
+			<center>
+	            <form name="frmborrar" method="post" action="">
+		            <input type="hidden" name="id" value="<?=$conte['id']; ?>">
+		            <input type="hidden" name="title" value="<?=$conte['nombre']; ?>"><br /><br />
+		            <h3>Usted desea eliminar:<br><em style="color:#000;"><?=$conte['nombre']; ?></em>.</h3><br>
+		            <button type="button" onclick="javascript:history.back(1);" onclick="location.href='?lagc=configuracion&id=permisos'">Atras</button>
+		            <button type="submit">Borrar</button>
+	            </form>
+        	</center>
+            <?php
+			}
+			else {
+				$config = new LagcConfig(); //Conexion
+				$con = mysql_connect($config->lagclocal,$config->lagcuser,$config->lagcpass);
+				mysql_select_db($config->lagcbd,$con);
+				$sql = "DELETE FROM permisos WHERE id='".$id."'";
+				$Query = mysql_query ($sql, $con) or die ("Error: <b>" . mysql_error() . "</b>");
+				$sql = "ALTER TABLE permisos AUTO_INCREMENT=1";
+				$Query = mysql_query ($sql, $con) or die ("Error: <b>" . mysql_error() . "</b>");
+				mysql_close($con);
+				echo "<br /><script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=configuracion&id=permisos'\", 1500) </script><center><h3><b><em>".$_POST['title']."</em></b>.</h3><h4>Borrado Correctamente</h4></center>";
+			}
+		} else { echo "<br><center><h3>No existe el contenido</h3></center>"; }
+	}
 	static function nombrenivel($val){
-		if($val==1){
-			$fin = "Administrador";
-		}
-		else if($val==2){
-			$fin = "Supervisor";
-		}
-		else if($val==3){
-			$fin = "Asistencia";
-		}
-		else if($val==4){
-			$fin = "Trabajador";
-		}
+		if($val==1){ $fin = "Administrador"; }
+		else if($val==2){ $fin = "Supervisor"; }
+		else if($val==3){ $fin = "Asistencia"; }
+		else if($val==4){ $fin = "Trabajador"; }
 		return $fin;
 	}
 }

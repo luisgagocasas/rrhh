@@ -53,18 +53,15 @@ class Login {
     }
 }
 class lagc{
-    public function _activo($val) {
-        if($val==1){ $final = "Activo"; }
-        else { $final = "<b>Desactivado</b>"; }
-        return $final;
+    public function check($val1, $val2){
+        if($val1==$val2){ $fin = " checked"; }
+        else { $fin = ""; }
+        return $fin;
     }
-    public function _checked($val){
-        if($val==1){ echo " checked "; }
-        else { echo " "; }
-    }
-    public function _checked2($val){
-        if($val==0){ echo " checked "; }
-        else { echo " "; }
+    public function select($val1, $val2){
+        if($val1==$val2){ $fin = " selected"; }
+        else { $fin = ""; }
+        return $fin;
     }
 }
 ?>

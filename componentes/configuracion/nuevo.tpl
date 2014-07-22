@@ -7,7 +7,7 @@
     </div>
     <div class="form_control">
         <label for="txtdeparta">Niveles</label>
-        <select name="niveles" id="txtdeparta">
+        <select name="niveles" size="5" id="txtdeparta" style="height: inherit;">
             <option value="1">Administrador</option>
             <option value="2">Supervisor</option>
             <option value="3">Asistencia</option>
