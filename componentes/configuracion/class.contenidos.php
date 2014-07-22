@@ -80,5 +80,75 @@ class Configuracion{
 			echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=configuracion'\", 1500) </script></br></br><center><h4>Se guardo correctamente.</h4></center>";
 		}
 	}
+	static function permisos(){ ?>
+		<div class="tlcabecera">
+			<a href="?lagc=configuracion" title="Configuración del sitio" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Configuración</a>
+			<a href="?lagc=configuracion&id=permisos" title="Ver Permisos" class="menucompo">
+				<img src="plantillas/default/img/lista.png"><b>Permisos</b></a>
+			<a href="?lagc=configuracion&id=nuevo" title="Ver Permisos" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Crear Permiso</a>
+		</div>
+		<?php
+		$respcont = mysql_query("select * from permisos");
+        $rows = mysql_num_rows($respcont); ?>
+		<ul class="titulos">
+			<li>Nombre</li>
+			<li>Nivel</li>
+            <li><b>Registros (<?=$rows; ?>)</b></li>
+        </ul>
+        <?php
+        while($cont = mysql_fetch_array($respcont)){
+	        echo "<ul class=\"resultados\">\n";
+	        echo "<li>".$cont['nombre']."</li>";
+	        echo "<li>".Configuracion::nombrenivel($cont['nivel'])."</li>";
+	        echo "<li>
+	        <a href=\"?lagc=configuracion&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombre'])."\" title=\"Editar Participante\" class=\"btnopcion\">
+	        	<img src=\"plantillas/default/img/editar.png\" />
+	        </a>
+	        <a href=\"?lagc=configuracion&id=".$cont['id']."&borrar=".LGlobal::Url_Amigable($cont['nombre'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
+	        	<img src=\"plantillas/default/img/borrar.png\" />
+	        </a></li>";
+	        echo "</ul>";
+        }
+	}
+	static function nuevo(){ ?>
+		<div class="tlcabecera">
+			<a href="?lagc=configuracion" title="Configuración del sitio" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Configuración</a>
+			<a href="?lagc=configuracion&id=permisos" title="Ver Permisos" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Permisos</a>
+			<a href="?lagc=configuracion&id=nuevo" title="Ver Permisos" class="menucompo">
+				<img src="plantillas/default/img/lista.png"><b>Crear Permiso</b></a>
+		</div>
+		<?php
+		if (empty($_POST['nombres'])) {
+			include "nuevo.tpl";
+		}
+		else {
+			$config = new LagcConfig(); //Conexion
+			$con = mysql_connect($config->lagclocal,$config->lagcuser,$config->lagcpass);
+			mysql_select_db($config->lagcbd,$con);
+			$sql = "INSERT INTO permisos (nombre, nivel) VALUES ('".$_POST['nombres']."','".$_POST['niveles']."')";
+			mysql_query($sql,$con);
+			echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=configuracion&id=permisos'\", 1000) </script>
+				<br><br><center><h3>".$_POST['nombres'].".<br>Se guardo correctamente.</h3></center>";
+		}
+	}
+	static function nombrenivel($val){
+		if($val==1){
+			$fin = "Administrador";
+		}
+		else if($val==2){
+			$fin = "Supervisor";
+		}
+		else if($val==3){
+			$fin = "Asistencia";
+		}
+		else if($val==4){
+			$fin = "Trabajador";
+		}
+		return $fin;
+	}
 }
 ?>
