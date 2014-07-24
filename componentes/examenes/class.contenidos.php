@@ -31,13 +31,15 @@ class Examenes{
 		        echo "<ul class=\"resultados\">\n";
 		        echo "<li>".$cont['examen_nombre']."</li>";
 		        echo "<li><a href=\"?lagc=examenes&id=".$cont['examen_id']."&participantes=".$cont['examen_nombre']."\">Participantes ($rowss)</a></li>";
-		        echo "<li>
-		        <a href=\"?lagc=examenes&id=".$cont['examen_id']."&editar=".LGlobal::Url_Amigable($cont['examen_nombre'])."\" title=\"Editar Perfil\" class=\"btnopcion\">
-		        	<img src=\"plantillas/default/img/editar.png\" />
-		        </a>
-		        <a href=\"?lagc=examenes&id=".$cont['examen_id']."&borrar=".LGlobal::Url_Amigable($cont['examen_nombre'])."\" title=\"Borrar Perfil\" class=\"btnopcion\">
-		        	<img src=\"plantillas/default/img/borrar.png\" />
-		        </a></li>";
+		        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
+			        echo "<li>
+			        <a href=\"?lagc=examenes&id=".$cont['examen_id']."&editar=".LGlobal::Url_Amigable($cont['examen_nombre'])."\" title=\"Editar Perfil\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/editar.png\" />
+			        </a>
+			        <a href=\"?lagc=examenes&id=".$cont['examen_id']."&borrar=".LGlobal::Url_Amigable($cont['examen_nombre'])."\" title=\"Borrar Perfil\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/borrar.png\" />
+			        </a></li>";
+			    }
 		        echo "</ul>";
 	        }
         }
@@ -276,13 +278,15 @@ class Examenes{
 	        echo "<li>".$clinica['nombre']."</li>";
 	        echo "<li>".$clinica['direccion']."</li>";
 	        echo "<li>".$clinica['telefono']."</li>";
-	        echo "<li>
-	        <a href=\"?lagc=examenes&id=".$clinica['id_clinica']."&editarclinica=".LGlobal::Url_Amigable($clinica['nombre'])."\" title=\"Editar CLinica\" class=\"btnopcion\">
-	        	<img src=\"plantillas/default/img/editar.png\" />
-	        </a>
-	        <a href=\"?lagc=examenes&id=".$clinica['id_clinica']."&borrarclinica=".LGlobal::Url_Amigable($clinica['nombre'])."\" title=\"Borrar CLinica\" class=\"btnopcion\">
-	        	<img src=\"plantillas/default/img/borrar.png\" />
-	        </a></li>";
+	        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
+		        echo "<li>
+		        <a href=\"?lagc=examenes&id=".$clinica['id_clinica']."&editarclinica=".LGlobal::Url_Amigable($clinica['nombre'])."\" title=\"Editar CLinica\" class=\"btnopcion\">
+		        	<img src=\"plantillas/default/img/editar.png\" />
+		        </a>
+		        <a href=\"?lagc=examenes&id=".$clinica['id_clinica']."&borrarclinica=".LGlobal::Url_Amigable($clinica['nombre'])."\" title=\"Borrar CLinica\" class=\"btnopcion\">
+		        	<img src=\"plantillas/default/img/borrar.png\" />
+		        </a></li>";
+		    }
 	        echo "</ul>";
         }
 

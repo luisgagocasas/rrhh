@@ -29,13 +29,15 @@ class Seguros{
 		        echo "<ul class=\"resultados\">\n";
 		        echo "<li>".$cont['seguro_nombre']."</li>";
 		        echo "<li><a href=\"?lagc=seguro&id=".$cont['seguro_id']."&participantes=".$cont['seguro_nombre']."\">Participantes ($rowss)</a></li>";
-		        echo "<li>
-		        <a href=\"?lagc=seguro&id=".$cont['seguro_id']."&editar=".LGlobal::Url_Amigable($cont['seguro_nombre'])."\" title=\"Editar Perfil\" class=\"btnopcion\">
-		        	<img src=\"plantillas/default/img/editar.png\" />
-		        </a>
-		        <a href=\"?lagc=seguro&id=".$cont['seguro_id']."&borrar=".LGlobal::Url_Amigable($cont['seguro_nombre'])."\" title=\"Borrar Perfil\" class=\"btnopcion\">
-		        	<img src=\"plantillas/default/img/borrar.png\" />
-		        </a></li>";
+		        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
+			        echo "<li>
+			        <a href=\"?lagc=seguro&id=".$cont['seguro_id']."&editar=".LGlobal::Url_Amigable($cont['seguro_nombre'])."\" title=\"Editar Perfil\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/editar.png\" />
+			        </a>
+			        <a href=\"?lagc=seguro&id=".$cont['seguro_id']."&borrar=".LGlobal::Url_Amigable($cont['seguro_nombre'])."\" title=\"Borrar Perfil\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/borrar.png\" />
+			        </a></li>";
+			    }
 		        echo "</ul>";
 	        }
         }
