@@ -29,13 +29,15 @@ class Cursos{
 		        echo "<ul class=\"resultados\">\n";
 		        echo "<li>".$cont['curso_nombre']."</li>";
 		        echo "<li><a href=\"?lagc=cursos&id=".$cont['curso_id']."&participantes=".$cont['curso_nombre']."\">Participantes ($rowss)</a></li>";
-		        echo "<li>
-		        <a href=\"?lagc=cursos&id=".$cont['curso_id']."&editar=".LGlobal::Url_Amigable($cont['curso_nombre'])."\" title=\"Editar Participante\" class=\"btnopcion\">
-		        	<img src=\"plantillas/default/img/editar.png\" />
-		        </a>
-		        <a href=\"?lagc=cursos&id=".$cont['curso_id']."&borrar=".LGlobal::Url_Amigable($cont['curso_nombre'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
-		        	<img src=\"plantillas/default/img/borrar.png\" />
-		        </a></li>";
+		        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
+			        echo "<li>
+			        <a href=\"?lagc=cursos&id=".$cont['curso_id']."&editar=".LGlobal::Url_Amigable($cont['curso_nombre'])."\" title=\"Editar Participante\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/editar.png\" />
+			        </a>
+			        <a href=\"?lagc=cursos&id=".$cont['curso_id']."&borrar=".LGlobal::Url_Amigable($cont['curso_nombre'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/borrar.png\" />
+			        </a></li>";
+			    }
 		        echo "</ul>";
 	        }
         }

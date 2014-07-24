@@ -29,17 +29,21 @@ class Usuarios{
         <?php
         while($cont = mysql_fetch_array($respcont)){
 	        echo "<ul class=\"resultados\">\n";
-	        if($cont['permisos']==4){ echo "<li style=\"width: 30px;\"><input name=\"checkbox[]\" type=\"checkbox\" value=\"".$cont['id']."\" alt=\"1\" onChange=\"suma(this)\"></li>"; }
-	        else { echo "<li style=\"width: 30px;\"></li>"; }
+	        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
+		        if($cont['permisos']==4){ echo "<li style=\"width: 30px;\"><input name=\"checkbox[]\" type=\"checkbox\" value=\"".$cont['id']."\" alt=\"1\" onChange=\"suma(this)\"></li>"; }
+		        else { echo "<li style=\"width: 30px;\"></li>"; }
+		    }
 	        echo "<li>".$cont['dni']."</li>\n";
 	        echo "<li><a href=\"?lagc=usuarios&id=".$cont['id']."&verperfil=".LGlobal::Url_Amigable($cont['nombres'])."\">".$cont['nombres']."</a></li>";
 		    echo "<li>".$cont['apellidop']." ".$cont['apellidom']."</li>\n";
 	        echo "<li>".$cont['email']."</li>\n";
 	        echo "<li>".Usuarios::estado($cont['estado'])."</li>\n";
-	        echo "<li>
-	        <a href=\"?lagc=usuarios&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Editar Participante\" class=\"btnopcion\">
-	        	<img src=\"plantillas/default/img/editar.png\" />
-	        </a>";
+	        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
+		        echo "<li>
+		        <a href=\"?lagc=usuarios&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Editar Participante\" class=\"btnopcion\">
+		        	<img src=\"plantillas/default/img/editar.png\" />
+		        </a>";
+	    	}
 	        echo "</ul>";
         }
         ?>
@@ -160,20 +164,24 @@ class Usuarios{
 		<?php
         while($cont = mysql_fetch_array($result)){
 	        echo "<ul class=\"resultados\">\n";
-	        if($cont['permisos']==4){ echo "<li style=\"width: 30px;\"><input name=\"checkbox[]\" type=\"checkbox\" value=\"".$cont['id']."\" alt=\"1\" onChange=\"suma(this)\"></li>"; }
-	        else { echo "<li style=\"width: 30px;\"></li>"; }
+	        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
+		        if($cont['permisos']==4){ echo "<li style=\"width: 30px;\"><input name=\"checkbox[]\" type=\"checkbox\" value=\"".$cont['id']."\" alt=\"1\" onChange=\"suma(this)\"></li>"; }
+		        else { echo "<li style=\"width: 30px;\"></li>"; }
+		    }
 	        echo "<li>".$cont['dni']."</li>\n";
 	        echo "<li><a href=\"?lagc=usuarios&id=".$cont['id']."&verperfil=".LGlobal::Url_Amigable($cont['nombres'])."\">".$cont['nombres']."</a></li>";
 		    echo "<li>".$cont['apellidop']." ".$cont['apellidom']."</li>\n";
 	        echo "<li>".$cont['email']."</li>\n";
 	        echo "<li>".Usuarios::estado($cont['estado'])."</li>\n";
-	        echo "<li>
-	        <a href=\"?lagc=usuarios&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Editar Participante\" class=\"btnopcion\">
-	        	<img src=\"plantillas/default/img/editar.png\" />
-	        </a>
-	        <a href=\"?lagc=usuarios&id=".$cont['id']."&borrar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
-	        	<img src=\"plantillas/default/img/borrar.png\" />
-	        </a></li>";
+	        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
+		        echo "<li>
+		        <a href=\"?lagc=usuarios&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Editar Participante\" class=\"btnopcion\">
+		        	<img src=\"plantillas/default/img/editar.png\" />
+		        </a>
+		        <a href=\"?lagc=usuarios&id=".$cont['id']."&borrar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
+		        	<img src=\"plantillas/default/img/borrar.png\" />
+		        </a></li>";
+		    }
 	        echo "</ul>";
         }
         ?>
@@ -279,13 +287,15 @@ class Usuarios{
 		        echo "<li><a href=\"?lagc=usuarios&id=".$cont['id']."&verperfil=".LGlobal::Url_Amigable($cont['nombres'])."\">".$cont['nombres']."</a></li>";
 		        echo "<li>".$cont['apellidop']." ".$cont['apellidom']."</li>\n";
 		        echo "<li>".$cont['email']."</li>\n";
-		        echo "<li>
-		        <a href=\"?lagc=usuarios&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Editar Participante\" class=\"btnopcion\">
-		        	<img src=\"plantillas/default/img/editar.png\" />
-		        </a>
-		        <a href=\"?lagc=usuarios&id=".$cont['id']."&borrar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
-		        	<img src=\"plantillas/default/img/borrar.png\" />
-		        </a></li>";
+		        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
+			        echo "<li>
+			        <a href=\"?lagc=usuarios&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Editar Participante\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/editar.png\" />
+			        </a>
+			        <a href=\"?lagc=usuarios&id=".$cont['id']."&borrar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/borrar.png\" />
+			        </a></li>";
+			    }
 		        echo "</ul>";
 	        }
 		}
@@ -318,19 +328,23 @@ class Usuarios{
 	        <?php
 	        while($cont = mysql_fetch_array($respcont)){
 		        echo "<ul class=\"resultados\">\n";
-		        echo "<li style=\"width: 30px;\"><input name=\"checkbox[]\" type=\"checkbox\" value=\"".$cont['id']."\" alt=\"1\" onChange=\"suma(this)\"></li>";
+		        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
+		        	echo "<li style=\"width: 30px;\"><input name=\"checkbox[]\" type=\"checkbox\" value=\"".$cont['id']."\" alt=\"1\" onChange=\"suma(this)\"></li>";
+		        }
 		        echo "<li>".$cont['dni']."</li>\n";
 		        echo "<li><a href=\"?lagc=usuarios&id=".$cont['id']."&verperfil=".LGlobal::Url_Amigable($cont['nombres'])."\">".$cont['nombres']."</a></li>";
 		        echo "<li>".$cont['apellidop']." ".$cont['apellidom']."</li>\n";
 		        echo "<li>".$cont['email']."</li>\n";
 		        echo "<li>".Usuarios::estado($cont['estado'])."</li>\n";
-		        echo "<li>
-		        <a href=\"?lagc=usuarios&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Editar Participante\" class=\"btnopcion\">
-		        	<img src=\"plantillas/default/img/editar.png\" />
-		        </a>
-		        <a href=\"?lagc=usuarios&id=".$cont['id']."&borrar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
-		        	<img src=\"plantillas/default/img/borrar.png\" />
-		        </a></li>";
+		        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
+			        echo "<li>
+			        <a href=\"?lagc=usuarios&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Editar Participante\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/editar.png\" />
+			        </a>
+			        <a href=\"?lagc=usuarios&id=".$cont['id']."&borrar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/borrar.png\" />
+			        </a></li>";
+			    }
 		        echo "</ul>";
 	        }
 	        ?>

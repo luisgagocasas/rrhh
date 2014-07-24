@@ -2,7 +2,7 @@
 class Sedes{
 	static function inicio(){ ?>
 		<div class="tlcabecera">
-			<a href="?lagc=usuarios" title="Lista de Usuarios" class="menucompo">
+			<a href="?lagc=sedes" title="Lista de Sedes" class="menucompo">
 				<img src="plantillas/default/img/lista.png"><u><b>Todos</b></u></a>
 		</div>
         <?php $respcont = mysql_query("select * from com_sedes ORDER BY sede_id DESC");
@@ -21,13 +21,15 @@ class Sedes{
 	        echo "<li>".$cont['sede_ncontrato']."</li>\n";
 	        echo "<li>".$cont['sede_codigo']."</li>";
 	        echo "<li>".Sedes::estado($cont['sede_estado'])."</li>\n";
-	        echo "<li>
-	        <a href=\"?lagc=sedes&id=".$cont['sede_id']."&editar=".LGlobal::Url_Amigable($cont['sede_nombre'])."\" title=\"Editar Participante\" class=\"btnopcion\">
-	        	<img src=\"plantillas/default/img/editar.png\" />
-	        </a>
-	        <a href=\"?lagc=sedes&id=".$cont['sede_id']."&borrar=".LGlobal::Url_Amigable($cont['sede_nombre'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
-	        	<img src=\"plantillas/default/img/borrar.png\" />
-	        </a></li>";
+	        if(Componente::permisos($_COOKIE["lgpermisos"], 1, "", "", "")){
+		        echo "<li>
+		        <a href=\"?lagc=sedes&id=".$cont['sede_id']."&editar=".LGlobal::Url_Amigable($cont['sede_nombre'])."\" title=\"Editar Participante\" class=\"btnopcion\">
+		        	<img src=\"plantillas/default/img/editar.png\" />
+		        </a>
+		        <a href=\"?lagc=sedes&id=".$cont['sede_id']."&borrar=".LGlobal::Url_Amigable($cont['sede_nombre'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
+		        	<img src=\"plantillas/default/img/borrar.png\" />
+		        </a></li>";
+		    }
 	        echo "</ul>";
         }
     }
@@ -51,7 +53,7 @@ class Sedes{
 	}
 	function nuevo(){ ?>
 		<div class="tlcabecera">
-			<a href="?lagc=sedes" title="Lista de Usuarios" class="menucompo">
+			<a href="?lagc=sedes" title="Lista de Sedes" class="menucompo">
 				<img src="plantillas/default/img/lista.png">Todos</a>
 		</div>
 		<?php
@@ -84,7 +86,7 @@ class Sedes{
 		            <input type="hidden" name="id" value="<?=$conte['sede_id']; ?>">
 		            <input type="hidden" name="title" value="<?=$conte['sede_nombre']; ?>"><br /><br />
 		            <h3>Usted desea eliminar:<br><em style="color:#000;"><?=$conte['sede_nombre']; ?></em>.</h3><br>
-		            <button type="button" onclick="javascript:history.back(1);" onclick="location.href='?lagc=usuarios'">Atras</button>
+		            <button type="button" onclick="javascript:history.back(1);" onclick="location.href='?lagc=sedes'">Atras</button>
 		             <button type="submit">Borrar</button>
 	            </form>
         	</center>

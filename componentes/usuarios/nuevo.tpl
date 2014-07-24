@@ -113,9 +113,17 @@
             <label for="txtpermisos"><u>Permisos</u></label>
             <select name="permisos" id="txtpermisos">
             <?php
-                $respperm = mysql_query("select * from permisos ORDER BY nombre DESC");
-                while($permisos = mysql_fetch_array($respperm)){
-                    echo "<option title=\"".$permisos['nivel']."\" value=\"".$permisos['id']."\">".$permisos['nombre']."</option>";
+                if(Componente::permisos($_COOKIE["lgpermisos"], 1, "", "", "")){
+                    $respperm = mysql_query("select * from permisos ORDER BY nombre DESC");
+                    while($permisos = mysql_fetch_array($respperm)){
+                        echo "<option title=\"".$permisos['nivel']."\" value=\"".$permisos['id']."\">".$permisos['nombre']."</option>";
+                    }
+                }
+                else {
+                    $respperm = mysql_query("select * from permisos where nivel!=1 ORDER BY nombre DESC");
+                    while($permisos = mysql_fetch_array($respperm)){
+                        echo "<option title=\"".$permisos['nivel']."\" value=\"".$permisos['id']."\">".$permisos['nombre']."</option>";
+                    }
                 }
             ?>
             </select>

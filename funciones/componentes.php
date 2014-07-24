@@ -161,8 +161,8 @@ class Componente {
 		}
 		else { echo "no se encontro"; }
 	}
-	static function permisos($permiso){
-		if($permiso=="1" or $permiso=="2" or $permiso=="3"){
+	static function permisos($permiso, $val1, $val2, $val3, $val4){
+		if($permiso==$val1 or $permiso==$val2 or $permiso==$val3){
 			$final = true;
 		}
 		else {

@@ -26,7 +26,12 @@
 					</li>
 					<li>
 						<ul>
-							<li><a href="<?=$config->lagcurl; ?>?lagc=usuarios&id=<?=$_COOKIE["user"]; ?>&editar=<?=LGlobal::Url_Amigable($_COOKIE["lgnombres"]); ?>">Editar Perfil</a></li>
+							<?php
+							if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, 3, "")){ ?>
+								<li><a href="<?=$config->lagcurl; ?>?lagc=usuarios&id=<?=$_COOKIE["user"]; ?>&editar=<?=LGlobal::Url_Amigable($_COOKIE["lgnombres"]); ?>">Editar Perfil</a></li>
+							<?php } else { ?>
+								<li><a href="<?=$config->lagcurl; ?>?lagc=usuarios&id=<?=$_COOKIE["user"]; ?>&verperfil=<?=LGlobal::Url_Amigable($_COOKIE["lgnombres"]); ?>">Ver Perfil</a></li>
+							<?php } ?>
 							<li><a href="?logout=true">Salir</a></li>
 						</ul>
 					</li>
@@ -36,7 +41,7 @@
                 <ul class="nav">
                     <li><a href=".">Inicio</a></li>
                     <?php
-                    if(Componente::permisos($_COOKIE["lgpermisos"])){
+                    if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, 3, "")){
                     ?>
                     <li><a href="">Modulos</a>
                         <ul>
@@ -45,21 +50,21 @@
                     </li>
                     <?php } ?>
                     <?php
-                    if(Componente::permisos($_COOKIE["lgpermisos"])){
+                    if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, 3, "")){
                     ?>
                     <li>
 						<a href="?lagc=asistencia">Asistencia</a>
                     </li>
                     <?php } ?>
                     <?php
-                    if(Componente::permisos($_COOKIE["lgpermisos"])){
+                    if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
                     ?>
                     <li>
                     	<a href="?lagc=reporte">Reportes</a>
                     </li>
                     <?php } ?>
                     <?php
-                    if(Componente::permisos($_COOKIE["lgpermisos"])){
+                    if(Componente::permisos($_COOKIE["lgpermisos"], 1, "", "", "")){
                     ?>
                     <li>
                     	<a href="?lagc=configuracion">Configuración</a>
