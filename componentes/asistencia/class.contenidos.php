@@ -30,6 +30,54 @@ class Asistencia{
 		</br></br>
 		<?php
 	}
+	static function buscar($palabra){ ?>
+		<div class="tlcabecera">
+			<form method="get" action="" class="frm_validate" style="display: inline-block;width: 300px;">
+				<input type="hidden" name="lagc" value="asistencia">
+				<input type="hidden" name="id" value="buscar">
+			    <input type="text" name="buscar" required placeholder="Ingrese algo que buscar">
+			</form>
+		</div>
+		<?php
+		$result = mysql_query("SELECT * FROM com_asistencia WHERE dni LIKE '%$palabra%' or apellidop LIKE '%$palabra%' or apellidom LIKE '%$palabra%' or nombre LIKE '%$palabra%' or ensa LIKE '%$palabra%' or sede LIKE '%$palabra%'");
+		$rows = mysql_num_rows($result);
+		?>
+		<ul class="titulos">
+			<li>Apellidos</li>
+            <li>Nombres</li>
+            <li>DNI</li>
+            <li>Entrada/Salida</li>
+            <li>Sede</li>
+            <li>Fecha</li>
+            <li><b>Registros (<?=$rows; ?>)</b></li>
+        </ul>
+		<?php
+		if(!empty($palabra)){
+			$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+	        while($cont = mysql_fetch_array($result)){
+		        echo "<ul class=\"resultados\">\n";
+		        echo "<li>".$cont['apellidop']." ".$cont['apellidom']."</li>\n";
+		        echo "<li><a href=\"?lagc=usuarios&id=".$cont['id_user']."&verperfil=".LGlobal::Url_Amigable($cont['nombre'])."\">".$cont['nombre']."</a></li>";
+			    echo "<li>".$cont['dni']."</li>\n";
+		        echo "<li>".$cont['ensa']."</li>\n";
+		        echo "<li>".$cont['sede']."</li>\n";
+		        echo "<li><u>".date("d", $cont['fecha'])."</u> de ".$meses[date('n', $cont['fecha'])-1]." de ".date("Y", $cont['fecha'])."</li>\n";
+		        if(Componente::permisos($_COOKIE["lgpermisos"], 1, "", "", "")){
+			        echo "<li>
+			        <a href=\"#\" title=\"Exportar\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/excel.png\" />
+			        </a>
+			        <a href=\"#\" title=\"Editar registro\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/editar.png\" />
+			        </a>
+			        <a href=\"#\" title=\"Borrar registro\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/borrar.png\" />
+			        </a></li>";
+			    }
+		        echo "</ul>";
+	        }
+	    }
+	}
 	static function verquesede($val1){
 		$respsede = mysql_query("select * from com_sedes where sede_id='".$val1."'"); $sede = mysql_fetch_array($respsede);
 		if($sede['sede_id']==$val1){ $final = $sede['sede_nombre']; }

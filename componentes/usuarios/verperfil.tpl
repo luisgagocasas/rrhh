@@ -1,3 +1,4 @@
+<?php if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, 3, "")){ ?>
 <div class="tlcabecera">
     <a href="?lagc=usuarios" title="Lista de Usuarios" class="menucompo">
         <img src="plantillas/default/img/lista.png">Todos</a>
@@ -6,6 +7,7 @@
     <a href="?lagc=usuarios&id=2&ver=true" title="Lista de entradas" class="menucompo">
         <img src="plantillas/default/img/lista.png">Trabajadores</a>
 </div>
+<?php } ?>
 <br/>
 <h3>Perfil de <?=$cont['nombres']." ".$cont['apellidop']." ".$cont['apellidom']; ?> <span style="margin: 0px;display: inline-block;"><?=Usuarios::estado($cont['estado']); ?></span></h3>
 <div class="grid grid-pad">
