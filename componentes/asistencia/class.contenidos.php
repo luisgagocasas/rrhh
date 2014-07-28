@@ -120,12 +120,53 @@ class Asistencia{
 				<img src="plantillas/default/img/lista.png">Activar Sede</a>
 		</div>
 		</br></br></br>
-		<?php echo strtotime('-1 days'); ?>
 		<center>
 			En segundos se descargará automáticamente.</br>
 			<span style="font-size: 14px;color: #A74242;">Clic <a href="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=por1dias" style="text-decoration: none;color: #A74242;">" aqui "</a> si no se descarga automáticamente.</span>
 			</br>
-			<!--<iframe src="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=todo" frameborder="0" width="0" height="0"></iframe>-->
+			<iframe src="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=por1dias" frameborder="0" width="0" height="0"></iframe>
+		</center>
+		<?php
+	}
+	static function exportar7dias(){ ?>
+		<div class="tlcabecera">
+			<a href="?lagc=asistencia" title="Activar Sede" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Activar Sede</a>
+		</div>
+		</br></br></br>
+		<center>
+			En segundos se descargará automáticamente.</br>
+			<span style="font-size: 14px;color: #A74242;">Clic <a href="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=por7dias" style="text-decoration: none;color: #A74242;">" aqui "</a> si no se descarga automáticamente.</span>
+			</br>
+			<iframe src="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=por7dias" frameborder="0" width="0" height="0"></iframe>
+		</center>
+		<?php
+	}
+	static function exportar15dias(){ ?>
+		<div class="tlcabecera">
+			<a href="?lagc=asistencia" title="Activar Sede" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Activar Sede</a>
+		</div>
+		</br></br></br>
+		<center>
+			En segundos se descargará automáticamente.</br>
+			<span style="font-size: 14px;color: #A74242;">Clic <a href="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=por15dias" style="text-decoration: none;color: #A74242;">" aqui "</a> si no se descarga automáticamente.</span>
+			</br>
+			<iframe src="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=por15dias" frameborder="0" width="0" height="0"></iframe>
+		</center>
+		<?php
+	}
+	static function exportar1mes(){ ?>
+		<div class="tlcabecera">
+			<a href="?lagc=asistencia" title="Activar Sede" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Activar Sede</a>
+		</div>
+		</br></br></br>
+		<center>
+			En segundos se descargará automáticamente.</br>
+			<span style="font-size: 14px;color: #A74242;">Clic <a href="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=por1mes" style="text-decoration: none;color: #A74242;">" aqui "</a> si no se descarga automáticamente.</span>
+			</br>
+			<iframe src="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=por1mes" frameborder="0" width="0" height="0"></iframe>
 		</center>
 		<?php
 	}
