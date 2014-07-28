@@ -30,7 +30,7 @@ class Usuarios{
         while($cont = mysql_fetch_array($respcont)){
 	        echo "<ul class=\"resultados\">\n";
 	        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
-		        if($cont['permisos']==4){ echo "<li style=\"width: 30px;\"><input name=\"checkbox[]\" type=\"checkbox\" value=\"".$cont['id']."\" alt=\"1\" onChange=\"suma(this)\"></li>"; }
+		        if($cont['nivel']==4){ echo "<li style=\"width: 30px;\"><input name=\"checkbox[]\" type=\"checkbox\" value=\"".$cont['id']."\" alt=\"1\" onChange=\"suma(this)\"></li>"; }
 		        else { echo "<li style=\"width: 30px;\"></li>"; }
 		    }
 	        echo "<li>".$cont['dni']."</li>\n";
@@ -120,11 +120,13 @@ class Usuarios{
 				$ausuario = "usuario='".$_POST['usuario']."', ";
 			}
 			/* */
-			$sql = "UPDATE usuarios SET $apassword $ausuario nombres='".$_POST['nombres']."', apellidop='".$_POST['apellidop']."', apellidom='".$_POST['apellidom']."', permisos='".$_POST['permisos']."', imagen='".$nombreft."', dni='".$_POST['dni']."', codigo='".$_POST['codigo']."', cargo='".$_POST['cargo']."', fechanacimiento='".$_POST['cumpleanios']."', departamento='".$_POST['departamento']."', celular='".$_POST['cel']."', fechaingresoempresa='".$_POST['fempresa']."', gsanguineo='".$_POST['gsanguineo']."', estado='".$_POST['estado']."', genero='".$_POST['radGener']."', modificadoel='".time()."', comentario='".$_POST['comentario']."', sede_id='".$sedes."' WHERE id='".$id."'";
+			$resppermisos = mysql_query("select * from permisos where id='".$_POST['permisos']."'");
+			$permisos = mysql_fetch_array($resppermisos);
+			$nivel = $permisos['nivel'];
+			$sql = "UPDATE usuarios SET $apassword $ausuario email='".$_POST['email']."', nombres='".$_POST['nombres']."', apellidop='".$_POST['apellidop']."', apellidom='".$_POST['apellidom']."', permisos='".$_POST['permisos']."', nivel='".$nivel."', imagen='".$nombreft."', dni='".$_POST['dni']."', codigo='".$_POST['codigo']."', cargo='".$_POST['cargo']."', fechanacimiento='".$_POST['cumpleanios']."', departamento='".$_POST['departamento']."', celular='".$_POST['cel']."', fechaingresoempresa='".$_POST['fempresa']."', gsanguineo='".$_POST['gsanguineo']."', estado='".$_POST['estado']."', genero='".$_POST['radGener']."', modificadoel='".time()."', comentario='".$_POST['comentario']."', sede_id='".$sedes."' WHERE id='".$id."'";
 			$Query = mysql_query ($sql, $con) or die ("Error: <b>" . mysql_error() . "</b>");
 			mysql_close($con);
-			echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=usuarios'\", 1500) </script>
-				<br><br><center><h3>".$_POST['nombres'].$sicambio.".</h3><h4>Se guardo correctamente.</h4></center>";
+			echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=usuarios'\", 1000) </script><br><br><center><h3>".$_POST['nombres']." ".$_POST['apellidop'].$_POST['apellidom'].".<br>Se guardo correctamente.</h3></center>";
 		}
 	}
 	static function verperfil($id, $titulo){
@@ -165,7 +167,7 @@ class Usuarios{
         while($cont = mysql_fetch_array($result)){
 	        echo "<ul class=\"resultados\">\n";
 	        if(Componente::permisos($_COOKIE["lgpermisos"], 1, 2, "", "")){
-		        if($cont['permisos']==4){ echo "<li style=\"width: 30px;\"><input name=\"checkbox[]\" type=\"checkbox\" value=\"".$cont['id']."\" alt=\"1\" onChange=\"suma(this)\"></li>"; }
+		        if($cont['nivel']==4){ echo "<li style=\"width: 30px;\"><input name=\"checkbox[]\" type=\"checkbox\" value=\"".$cont['id']."\" alt=\"1\" onChange=\"suma(this)\"></li>"; }
 		        else { echo "<li style=\"width: 30px;\"></li>"; }
 		    }
 	        echo "<li>".$cont['dni']."</li>\n";
@@ -177,9 +179,6 @@ class Usuarios{
 		        echo "<li>
 		        <a href=\"?lagc=usuarios&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Editar Participante\" class=\"btnopcion\">
 		        	<img src=\"plantillas/default/img/editar.png\" />
-		        </a>
-		        <a href=\"?lagc=usuarios&id=".$cont['id']."&borrar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
-		        	<img src=\"plantillas/default/img/borrar.png\" />
 		        </a></li>";
 		    }
 	        echo "</ul>";
@@ -271,7 +270,7 @@ class Usuarios{
 					    <input type="text" name="buscar" required placeholder="Ingrese algo que buscar">
 					</form>
 			</div>
-	        <?php $respcont = mysql_query("select * from usuarios where permisos='1' ORDER BY id DESC");
+	        <?php $respcont = mysql_query("select * from usuarios where nivel='1' ORDER BY id DESC");
 	        $rows = mysql_num_rows($respcont); ?>
 			<ul class="titulos">
 				<li>Foto</li>
@@ -313,7 +312,7 @@ class Usuarios{
 				    <input type="text" name="buscar" required placeholder="Ingrese algo que buscar">
 				</form>
 			</div>
-	        <?php $respcont = mysql_query("select * from usuarios where permisos='4' ORDER BY id DESC");
+	        <?php $respcont = mysql_query("select * from usuarios where nivel='4' ORDER BY id DESC");
 	        $rows = mysql_num_rows($respcont); ?>
 			<ul class="titulos">
 				<li style="width: 30px;"></li>
@@ -340,9 +339,6 @@ class Usuarios{
 			        echo "<li>
 			        <a href=\"?lagc=usuarios&id=".$cont['id']."&editar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Editar Participante\" class=\"btnopcion\">
 			        	<img src=\"plantillas/default/img/editar.png\" />
-			        </a>
-			        <a href=\"?lagc=usuarios&id=".$cont['id']."&borrar=".LGlobal::Url_Amigable($cont['nombres'])."\" title=\"Borrar Participante\" class=\"btnopcion\">
-			        	<img src=\"plantillas/default/img/borrar.png\" />
 			        </a></li>";
 			    }
 		        echo "</ul>";
@@ -392,7 +388,7 @@ class Usuarios{
 				<img src="plantillas/default/img/lista.png">Administradores</a>
 			<a href="?lagc=usuarios&id=2&ver=true" title="Lista de entradas" class="menucompo">
 				<img src="plantillas/default/img/lista.png">Trabajadores</a>
-		</div>
+		</div></br></br></br>
 		<?php
 		if (empty($_POST['Submit'])) {
 			include "importar.tpl";
@@ -412,7 +408,7 @@ class Usuarios{
 			        if ($data[0]) {
 			        	$nuevo_usuario=mysql_query("select dni from usuarios where dni='".$data[3]."' or codigo='".$data[4]."'");
 			        	if(mysql_num_rows($nuevo_usuario)>0) {
-							echo "<p><b>DNI Duplicado</b> ".addslashes($data[0])." ".addslashes($data[1])." ".addslashes($data[2])." - ".addslashes($data[3])."</p>";
+							echo "<p style=\"color: #F00;\"><b>DNI ó Código duplicado: </b> ".addslashes($data[0])." ".addslashes($data[1]).", ".addslashes($data[2])." - ".addslashes($data[3]).", ".addslashes($data[4])."</p>";
 						}
 						else {
 				            mysql_query("INSERT INTO usuarios (usuario, password, apellidop, apellidom, nombres, dni, codigo, cargo, fechanacimiento, fechaingresoempresa, email, celular, gsanguineo, creadoel, ascreated, genero) VALUES
@@ -435,10 +431,17 @@ class Usuarios{
 				                    '1'
 				                )
 				            ");
+						echo "<p><b>Se a creado: </b>
+									".addslashes($data[0])."
+									".addslashes($data[1])."
+									".addslashes($data[2])."' -
+				                    ".addslashes($data[3]).",
+				                    ".addslashes($data[4])."
+				                    </p>";
 				        }
 			        }
 			    } while ($data = fgetcsv($handle,1000,",","'"));
-			    echo "<br/><br/><center>Se importo correctamente.</center>";
+			    echo "<br/><br/><center>Se proceso correctamente.</br><a href=\"?lagc=usuarios\">Continuar...</a></center>";
 			}
 		}
 	}
@@ -491,14 +494,14 @@ class Usuarios{
 				else { $nombreft = ""; }
 				$resppermisos = mysql_query("select * from permisos where id='".$_POST['permisos']."'");
 				$permisos = mysql_fetch_array($resppermisos);
-				$permiso = $permisos['nivel'];
-				if($permiso=="4"){
+				$nivel = $permisos['nivel'];
+				if($nivel=="4"){
 					if(empty($_POST['password'])){ $pashay = $_POST['dni']; }
 					else { $pashay = $_POST['password']; }
-					$sql = "INSERT INTO usuarios (usuario, password, email, nombres, apellidop, apellidom, permisos, etiquetapermiso, dni, codigo, cargo, fechanacimiento, departamento, celular, fechaingresoempresa, gsanguineo, estado, genero, creadoel, ascreated, comentario, imagen, sede_id) VALUES ('".$_POST['dni']."', '".md5($pashay)."', '".$_POST['email']."', '".$_POST['nombres']."', '".$_POST['apellidop']."', '".$_POST['apellidom']."', '".$permiso."', '".$_POST['permisos']."', '".$_POST['dni']."', '".$_POST['codigo']."', '".$_POST['cargo']."', '".$_POST['cumpleanios']."', '".$_POST['departamento']."', '".$_POST['cel']."', '".$_POST['fempresa']."', '".$_POST['gsanguineo']."', '".$_POST['estado']."', '".$_POST['radGener']."', '".time()."', '0', '".$_POST['comentario']."', '".$nombreft."', '".$sedes."')";
+					$sql = "INSERT INTO usuarios (usuario, password, email, nombres, apellidop, apellidom, permisos, nivel, dni, codigo, cargo, fechanacimiento, departamento, celular, fechaingresoempresa, gsanguineo, estado, genero, creadoel, ascreated, comentario, imagen, sede_id) VALUES ('".$_POST['dni']."', '".md5($pashay)."', '".$_POST['email']."', '".$_POST['nombres']."', '".$_POST['apellidop']."', '".$_POST['apellidom']."', '".$_POST['permisos']."', '".$nivel."', '".$_POST['dni']."', '".$_POST['codigo']."', '".$_POST['cargo']."', '".$_POST['cumpleanios']."', '".$_POST['departamento']."', '".$_POST['cel']."', '".$_POST['fempresa']."', '".$_POST['gsanguineo']."', '".$_POST['estado']."', '".$_POST['radGener']."', '".time()."', '0', '".$_POST['comentario']."', '".$nombreft."', '".$sedes."')";
 				}
 				else {
-					$sql = "INSERT INTO usuarios (usuario, password, email, nombres, apellidop, apellidom, permisos, etiquetapermiso, dni, codigo, cargo, fechanacimiento, departamento, celular, fechaingresoempresa, gsanguineo, estado, genero, creadoel, ascreated, comentario, imagen, sede_id) VALUES ('".$_POST['usuario']."', '".md5($_POST['password'])."', '".$_POST['email']."', '".$_POST['nombres']."', '".$_POST['apellidop']."', '".$_POST['apellidom']."', '".$permiso."', '".$_POST['permisos']."', '".$_POST['dni']."', '".$_POST['codigo']."', '".$_POST['cargo']."', '".$_POST['cumpleanios']."', '".$_POST['departamento']."', '".$_POST['cel']."', '".$_POST['fempresa']."', '".$_POST['gsanguineo']."', '".$_POST['estado']."', '".$_POST['radGener']."', '".time()."', '0', '".$_POST['comentario']."', '".$nombreft."', '".$sedes."')";
+					$sql = "INSERT INTO usuarios (usuario, password, email, nombres, apellidop, apellidom, permisos, nivel, dni, codigo, cargo, fechanacimiento, departamento, celular, fechaingresoempresa, gsanguineo, estado, genero, creadoel, ascreated, comentario, imagen, sede_id) VALUES ('".$_POST['usuario']."', '".md5($_POST['password'])."', '".$_POST['email']."', '".$_POST['nombres']."', '".$_POST['apellidop']."', '".$_POST['apellidom']."', '".$_POST['permisos']."', '".$nivel."', '".$_POST['dni']."', '".$_POST['codigo']."', '".$_POST['cargo']."', '".$_POST['cumpleanios']."', '".$_POST['departamento']."', '".$_POST['cel']."', '".$_POST['fempresa']."', '".$_POST['gsanguineo']."', '".$_POST['estado']."', '".$_POST['radGener']."', '".time()."', '0', '".$_POST['comentario']."', '".$nombreft."', '".$sedes."')";
 				}
 				mysql_query($sql,$con);
 				echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=usuarios'\", 1000) </script><br><br><center><h3>".$_POST['nombres']." ".$_POST['apellidop'].$_POST['apellidom'].".<br>Se guardo correctamente.</h3></center>";
@@ -523,13 +526,6 @@ class Usuarios{
 			<iframe src="<?=$config->lagcurl; ?>componentes/usuarios/exportar.php" frameborder="0" width="0" height="0"></iframe>
 		</center>
 		<?php
-	}
-	function nombre_permisos($var1){
-		if($var1=="1"){ $final = "Administrador"; }
-		else if($var1=="2"){ $final = "Supervisor"; }
-		else if($var1=="3"){ $final = "Asistencia"; }
-		else if($var1=="4"){ $final = "Participante"; }
-		return $final;
 	}
 	function estado($var1){
 		if($var1=="1"){ $final = "<span class=\"estado bg1\"></span>"; }

@@ -37,6 +37,7 @@ $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto"
 				<h2>Sistencia del <u><?=date("d"); ?></u> de <?=$meses[date('n')-1]; ?> de <?=date("Y"); ?></h2>
 				<form method="post" class="frm_validate" style="width: 320px" id="frmcheck">
 				    <input type="hidden" name="sede" value="<?=verquesede($_COOKIE["sedea"]); ?>">
+				    <input type="hidden" name="idsede" value="<?=$_COOKIE["sedea"]; ?>">
 				    <label for="entrada"><input name="ensa" id="entrada" type="radio" checked value="Entrada" />Entrada</label>
 				    <label for="salida"><input name="ensa" id="salida" type="radio" value="Salida" /> Salida</label>
 				    <input type="text" name="dni" id="dni" autocomplete="off" required placeholder="DNI o Código">

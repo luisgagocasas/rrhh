@@ -20,7 +20,7 @@
 			<nav class="menuuser">
 				<ul>
 					<li>
-						<a href="#">¡Hola <?=LGlobal::Url_Usuario($_COOKIE["user"], "nombres", "apellidos", "2"); ?>
+						<a href="#">¡Hola <?=LGlobal::Url_Usuario($_COOKIE["user"], "nombres", "apellidop", "2"); ?>
 							<?=LGlobal::foto_perfil($_COOKIE["user"], "avatar"); ?>
 						</a>
 					</li>

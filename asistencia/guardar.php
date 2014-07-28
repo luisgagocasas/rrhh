@@ -21,7 +21,7 @@ $rows = mysql_num_rows($respuser);
                     $mmensaje = "Hasta luego</br>".$user['nombres']." ".$user['apellidop']." ".$user['apellidom'];
                     $fondopp = " background-color: #FC0000;";
                 }
-                $sql = "INSERT INTO com_asistencia (id_user, apellidop, apellidom, nombre, dni, ensa, sede, fecha) VALUES ('".$user['id']."', '".$user['apellidop']."', '".$user['apellidom']."', '".$user['nombres']."', '".$user['dni']."', '".$_POST['ensa']."', '".$_POST['sede']."', '".time()."')";
+                $sql = "INSERT INTO com_asistencia (id_user, apellidop, apellidom, nombre, dni, ensa, sede, sede_id, fecha) VALUES ('".$user['id']."', '".$user['apellidop']."', '".$user['apellidom']."', '".$user['nombres']."', '".$user['dni']."', '".$_POST['ensa']."', '".$_POST['sede']."', '".$_POST['idsede']."', '".time()."')";
                 mysql_query($sql,$con);
             }
             else {

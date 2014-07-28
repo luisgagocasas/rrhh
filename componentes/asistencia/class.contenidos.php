@@ -35,21 +35,25 @@ class Asistencia{
 			<form method="get" action="" class="frm_validate" style="display: inline-block;width: 300px;">
 				<input type="hidden" name="lagc" value="asistencia">
 				<input type="hidden" name="id" value="buscar">
-			    <input type="text" name="buscar" required placeholder="Ingrese algo que buscar">
+			    <input type="text" name="buscar" required placeholder="Ingrese algo que buscar" value="<?=$_GET['buscar']; ?>">
 			</form>
+			<?php
+			if(!empty($palabra)){ ?>
+				<div style="float:right;">
+				<?php
+				$result = mysql_query("SELECT * FROM usuarios WHERE dni LIKE '%$palabra%' or apellidop LIKE '%$palabra%' or apellidom LIKE '%$palabra%' or nombres LIKE '%$palabra%' or codigo LIKE '%$palabra%'");
+				$rows = mysql_num_rows($result); ?>
+            	<b>Registros (<?=$rows; ?>)</b>
+            	</div>
+            <?php } ?>
 		</div>
-		<?php
-		$result = mysql_query("SELECT * FROM com_asistencia WHERE dni LIKE '%$palabra%' or apellidop LIKE '%$palabra%' or apellidom LIKE '%$palabra%' or nombre LIKE '%$palabra%' or ensa LIKE '%$palabra%' or sede LIKE '%$palabra%'");
-		$rows = mysql_num_rows($result);
-		?>
 		<ul class="titulos">
 			<li>Apellidos</li>
             <li>Nombres</li>
             <li>DNI</li>
-            <li>Entrada/Salida</li>
-            <li>Sede</li>
-            <li>Fecha</li>
-            <li><b>Registros (<?=$rows; ?>)</b></li>
+            <li style="width: 330px;">Sedes</li>
+            <li>Estado</li>
+            <li></li>
         </ul>
 		<?php
 		if(!empty($palabra)){
@@ -57,26 +61,39 @@ class Asistencia{
 	        while($cont = mysql_fetch_array($result)){
 		        echo "<ul class=\"resultados\">\n";
 		        echo "<li>".$cont['apellidop']." ".$cont['apellidom']."</li>\n";
-		        echo "<li><a href=\"?lagc=usuarios&id=".$cont['id_user']."&verperfil=".LGlobal::Url_Amigable($cont['nombre'])."\">".$cont['nombre']."</a></li>";
+		        echo "<li><a href=\"?lagc=usuarios&id=".$cont['id']."&verperfil=".LGlobal::Url_Amigable($cont['nombres'])."\">".$cont['nombres']."</a></li>";
 			    echo "<li>".$cont['dni']."</li>\n";
-		        echo "<li>".$cont['ensa']."</li>\n";
-		        echo "<li>".$cont['sede']."</li>\n";
-		        echo "<li><u>".date("d", $cont['fecha'])."</u> de ".$meses[date('n', $cont['fecha'])-1]." de ".date("Y", $cont['fecha'])."</li>\n";
+			    echo "<li style=\"width: 330px;text-align: left;\"> ".Asistencia::sede_nombre($cont['sede_id'], $cont['id'])."</li>\n";
+			    echo "<li style=\"width: 50px;\">".Usuarios::estado($cont['estado'])."</li>\n";
 		        if(Componente::permisos($_COOKIE["lgpermisos"], 1, "", "", "")){
 			        echo "<li>
-			        <a href=\"#\" title=\"Exportar\" class=\"btnopcion\">
-			        	<img src=\"plantillas/default/img/excel.png\" />
-			        </a>
-			        <a href=\"#\" title=\"Editar registro\" class=\"btnopcion\">
-			        	<img src=\"plantillas/default/img/editar.png\" />
-			        </a>
-			        <a href=\"#\" title=\"Borrar registro\" class=\"btnopcion\">
-			        	<img src=\"plantillas/default/img/borrar.png\" />
+			        <a href=\"componentes/asistencia/exportar.php?que=sedetodo&usuario=".$cont['id']."\" title=\"Exportar por Usuario\" class=\"btnopcion\">
+			        	<img src=\"plantillas/default/img/excel.png\" /> Todo
 			        </a></li>";
 			    }
 		        echo "</ul>";
 	        }
 	    }
+	}
+	static function sede_nombre($val1,$val2){
+		if($val1){
+			$resppc = mysql_query("select * from com_sedes where sede_estado='1'");
+	        while($datapc = mysql_fetch_array($resppc)) {
+	            $aSubcads=split("[|.-]", $val1);//sacar las |
+	            $var1 = 0;
+	            for($k=0;$k<count($aSubcads);$k++)//separar una a una
+	                if ($aSubcads[$k] == $datapc['sede_id']) {
+	                    $var1 = 1;
+	                    break;
+	                }
+	            if ($var1 == 1)
+	                $fin .= "<a href=\"componentes/asistencia/exportar.php?que=sede&sedeid=".$datapc['sede_id']."&usuario=".$val2."\"><img src=\"plantillas/default/img/excel.png\" style=\"width: 20px;\" />".$datapc['sede_nombre']."</a>, ";
+	        }
+	    }
+	    else {
+	    	$fin = "No pertenece a ninguna sede";
+	    }
+	    return $fin;
 	}
 	static function verquesede($val1){
 		$respsede = mysql_query("select * from com_sedes where sede_id='".$val1."'"); $sede = mysql_fetch_array($respsede);
@@ -91,9 +108,24 @@ class Asistencia{
 		</br></br></br>
 		<center>
 			En segundos se descargará automáticamente.</br>
-			<span style="font-size: 14px;color: #A74242;">Clic <a href="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php" style="text-decoration: none;color: #A74242;">" aqui "</a> si no se descarga automáticamente.</span>
+			<span style="font-size: 14px;color: #A74242;">Clic <a href="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=todo" style="text-decoration: none;color: #A74242;">" aqui "</a> si no se descarga automáticamente.</span>
 			</br>
-			<iframe src="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php" frameborder="0" width="0" height="0"></iframe>
+			<iframe src="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=todo" frameborder="0" width="0" height="0"></iframe>
+		</center>
+		<?php
+	}
+	static function exportar1dias(){ ?>
+		<div class="tlcabecera">
+			<a href="?lagc=asistencia" title="Activar Sede" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Activar Sede</a>
+		</div>
+		</br></br></br>
+		<?php echo strtotime('-1 days'); ?>
+		<center>
+			En segundos se descargará automáticamente.</br>
+			<span style="font-size: 14px;color: #A74242;">Clic <a href="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=por1dias" style="text-decoration: none;color: #A74242;">" aqui "</a> si no se descarga automáticamente.</span>
+			</br>
+			<!--<iframe src="<?=$config->lagcurl; ?>componentes/asistencia/exportar.php?que=todo" frameborder="0" width="0" height="0"></iframe>-->
 		</center>
 		<?php
 	}

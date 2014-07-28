@@ -1,23 +1,90 @@
 <?php
 include "../../config.php"; include "../../funciones/function.globales.php";
-$respasig = mysql_query("SELECT * from com_asistencia");
-$salida_cvs .= mysql_field_name($respasig, 2).",";
-$salida_cvs .= mysql_field_name($respasig, 3).",";
-$salida_cvs .= mysql_field_name($respasig, 4).",";
-$salida_cvs .= mysql_field_name($respasig, 5).",";
-$salida_cvs .= mysql_field_name($respasig, 6).",";
-$salida_cvs .= mysql_field_name($respasig, 7).",";
-$salida_cvs .= mysql_field_name($respasig, 8)."";
-$salida_cvs .= "\n";
-while($asistencia = mysql_fetch_array($respasig)){
-	$salida_cvs .= utf8_decode($asistencia['apellidop']).",";
-	$salida_cvs .= utf8_decode($asistencia['apellidom']).",";
-	$salida_cvs .= utf8_decode($asistencia['nombre']).",";
-	$salida_cvs .= utf8_decode($asistencia['dni']).",";
-	$salida_cvs .= utf8_decode($asistencia['ensa']).",";
-	$salida_cvs .= utf8_decode($asistencia['sede']).",";
-	$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+if($_GET['que']=="todo"){
+	$respasig = mysql_query("SELECT * from com_asistencia");
+	$salida_cvs .= mysql_field_name($respasig, 2).",";
+	$salida_cvs .= mysql_field_name($respasig, 3).",";
+	$salida_cvs .= mysql_field_name($respasig, 4).",";
+	$salida_cvs .= mysql_field_name($respasig, 5).",";
+	$salida_cvs .= mysql_field_name($respasig, 6).",";
+	$salida_cvs .= mysql_field_name($respasig, 7).",";
+	$salida_cvs .= mysql_field_name($respasig, 8)."";
 	$salida_cvs .= "\n";
+	while($asistencia = mysql_fetch_array($respasig)){
+		$salida_cvs .= utf8_decode($asistencia['apellidop']).",";
+		$salida_cvs .= utf8_decode($asistencia['apellidom']).",";
+		$salida_cvs .= utf8_decode($asistencia['nombre']).",";
+		$salida_cvs .= utf8_decode($asistencia['dni']).",";
+		$salida_cvs .= utf8_decode($asistencia['ensa']).",";
+		$salida_cvs .= utf8_decode($asistencia['sede']).",";
+		$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+		$salida_cvs .= "\n";
+	}
+}
+if($_GET['que']=="sede"){
+	$respasig = mysql_query("SELECT * from com_asistencia where sede_id='".$_GET['sedeid']."' and id_user='".$_GET['usuario']."'");
+	$salida_cvs .= mysql_field_name($respasig, 2).",";
+	$salida_cvs .= mysql_field_name($respasig, 3).",";
+	$salida_cvs .= mysql_field_name($respasig, 4).",";
+	$salida_cvs .= mysql_field_name($respasig, 5).",";
+	$salida_cvs .= mysql_field_name($respasig, 6).",";
+	$salida_cvs .= mysql_field_name($respasig, 7).",";
+	$salida_cvs .= mysql_field_name($respasig, 9)."";
+	$salida_cvs .= "\n";
+	while($asistencia = mysql_fetch_array($respasig)){
+		$salida_cvs .= utf8_decode($asistencia['apellidop']).",";
+		$salida_cvs .= utf8_decode($asistencia['apellidom']).",";
+		$salida_cvs .= utf8_decode($asistencia['nombre']).",";
+		$salida_cvs .= utf8_decode($asistencia['dni']).",";
+		$salida_cvs .= utf8_decode($asistencia['ensa']).",";
+		$salida_cvs .= utf8_decode($asistencia['sede']).",";
+		$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+		$salida_cvs .= "\n";
+	}
+}
+if($_GET['que']=="sedetodo"){
+	$respasig = mysql_query("SELECT * from com_asistencia where id_user='".$_GET['usuario']."'");
+	$salida_cvs .= mysql_field_name($respasig, 2).",";
+	$salida_cvs .= mysql_field_name($respasig, 3).",";
+	$salida_cvs .= mysql_field_name($respasig, 4).",";
+	$salida_cvs .= mysql_field_name($respasig, 5).",";
+	$salida_cvs .= mysql_field_name($respasig, 6).",";
+	$salida_cvs .= mysql_field_name($respasig, 7).",";
+	$salida_cvs .= mysql_field_name($respasig, 9)."";
+	$salida_cvs .= "\n";
+	while($asistencia = mysql_fetch_array($respasig)){
+		$salida_cvs .= utf8_decode($asistencia['apellidop']).",";
+		$salida_cvs .= utf8_decode($asistencia['apellidom']).",";
+		$salida_cvs .= utf8_decode($asistencia['nombre']).",";
+		$salida_cvs .= utf8_decode($asistencia['dni']).",";
+		$salida_cvs .= utf8_decode($asistencia['ensa']).",";
+		$salida_cvs .= utf8_decode($asistencia['sede']).",";
+		$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+		$salida_cvs .= "\n";
+	}
+}
+if($_GET['que']=="por1dias"){
+	$respasig = mysql_query("SELECT * from com_asistencia");
+		$salida_cvs .= mysql_field_name($respasig, 2).",";
+		$salida_cvs .= mysql_field_name($respasig, 3).",";
+		$salida_cvs .= mysql_field_name($respasig, 4).",";
+		$salida_cvs .= mysql_field_name($respasig, 5).",";
+		$salida_cvs .= mysql_field_name($respasig, 6).",";
+		$salida_cvs .= mysql_field_name($respasig, 7).",";
+		$salida_cvs .= mysql_field_name($respasig, 9)."";
+		$salida_cvs .= "\n";
+	while($asistencia = mysql_fetch_array($respasig)){
+		if(date('d', strtotime('-1 days'))==date('d', strtotime('-1 days', $asistencia2['fecha']))){
+			$salida_cvs .= utf8_decode($asistencia['apellidop']).",";
+			$salida_cvs .= utf8_decode($asistencia['apellidom']).",";
+			$salida_cvs .= utf8_decode($asistencia['nombre']).",";
+			$salida_cvs .= utf8_decode($asistencia['dni']).",";
+			$salida_cvs .= utf8_decode($asistencia['ensa']).",";
+			$salida_cvs .= utf8_decode($asistencia['sede']).",";
+			$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+			$salida_cvs .= "\n";
+		}
+	}
 }
 
 header("Content-type: application/vnd.ms-excel");

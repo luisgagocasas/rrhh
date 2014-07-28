@@ -7,14 +7,14 @@ class Login {
         }
         if ($id===false) {
             $password = md5($password);
-            $sql = mysql_query("SELECT usuario,password,id,email,nombres,apellidop,permisos FROM usuarios WHERE usuario = '$user' AND password = '$password'");
+            $sql = mysql_query("SELECT usuario,password,id,email,nombres,apellidop,apellidom,nivel FROM usuarios WHERE usuario = '$user' AND password = '$password'");
         }
         else {
             if (!ereg("^[a-zA-Z0-9' ]{1,255}$",$id)) {
                 $id = 0;
             }
             $password = mysql_real_escape_string($password);
-            $sql = mysql_query("SELECT usuario,password,id,email,nombres,apellidop,permisos FROM usuarios WHERE usuario = '$user' AND password = '$password' AND id = '$id'");
+            $sql = mysql_query("SELECT usuario,password,id,email,nombres,apellidop,apellidom,nivel FROM usuarios WHERE usuario = '$user' AND password = '$password' AND id = '$id'");
         }
         if (mysql_num_rows($sql)>=1) {
             $row=mysql_fetch_assoc($sql);
@@ -31,8 +31,8 @@ class Login {
         setcookie("user", $array["id"], time() + 3600, "/");
         setcookie("lgcorreo", $array["email"], time() + 3600, "/");
         setcookie("lgnombres", $array["nombres"], time() + 3600, "/");
-        setcookie("lgapellidos", $array["apellidop"], time() + 3600, "/");
-        setcookie("lgpermisos", $array["permisos"], time() + 3600, "/");
+        setcookie("lgapellidos", $array["apellidop"]." ".$array["apellidom"], time() + 3600, "/");
+        setcookie("lgpermisos", $array["nivel"], time() + 3600, "/");
         return true;
     }
     public function LogOut() {
@@ -41,8 +41,8 @@ class Login {
         setcookie("user", $array["id"], time() + 3600, "/");
         setcookie("lgcorreo", $array["email"], time() + 3600, "/");
         setcookie("lgnombres", $array["nombres"], time() + 3600, "/");
-        setcookie("lgapellidos", $array["apellidop"], time() + 3600, "/");
-        setcookie("lgpermisos", $array["permisos"], time() + 3600, "/");
+        setcookie("lgapellidos", $array["apellidop"]." ".$array["apellidom"], time() + 3600, "/");
+        setcookie("lgpermisos", $array["nivel"], time() + 3600, "/");
         return true;
     }
     public function Check() {

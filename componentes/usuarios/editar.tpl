@@ -140,7 +140,7 @@
                     if(Componente::permisos($_COOKIE["lgpermisos"], 1, "", "", "")){
                         $respperm = mysql_query("select * from permisos ORDER BY nombre DESC");
                         while($permisos = mysql_fetch_array($respperm)){
-                            if($permisos['id']==$cont['nivel']){
+                            if($permisos['id']==$cont['permisos']){
                                 echo "<option title=\"".$permisos['nivel']."\" value=\"".$permisos['id']."\" selected=\"selected\">".$permisos['nombre']."</option>";
                             }
                             else {
@@ -151,7 +151,7 @@
                     else {
                         $respperm = mysql_query("select * from permisos where nivel!=1 ORDER BY nombre DESC");
                         while($permisos = mysql_fetch_array($respperm)){
-                            if($permisos['id']==$cont['nivel']){
+                            if($permisos['id']==$cont['permisos']){
                                 echo "<option title=\"".$permisos['nivel']."\" value=\"".$permisos['id']."\" selected=\"selected\">".$permisos['nombre']."</option>";
                             }
                             else {
