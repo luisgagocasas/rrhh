@@ -8,7 +8,8 @@ if($_GET['que']=="todo"){
 	$salida_cvs .= mysql_field_name($respasig, 5).",";
 	$salida_cvs .= mysql_field_name($respasig, 6).",";
 	$salida_cvs .= mysql_field_name($respasig, 7).",";
-	$salida_cvs .= mysql_field_name($respasig, 8)."";
+	$salida_cvs .= mysql_field_name($respasig, 9).",";
+	$salida_cvs .= "hora";
 	$salida_cvs .= "\n";
 	while($asistencia = mysql_fetch_array($respasig)){
 		$salida_cvs .= utf8_decode($asistencia['apellidop']).",";
@@ -17,7 +18,8 @@ if($_GET['que']=="todo"){
 		$salida_cvs .= utf8_decode($asistencia['dni']).",";
 		$salida_cvs .= utf8_decode($asistencia['ensa']).",";
 		$salida_cvs .= utf8_decode($asistencia['sede']).",";
-		$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+		$salida_cvs .= date("Y-m-d",$asistencia['fecha']).",";
+		$salida_cvs .= date("H:i:s",$asistencia['fecha'])."";
 		$salida_cvs .= "\n";
 	}
 }
@@ -29,7 +31,8 @@ if($_GET['que']=="sede"){
 	$salida_cvs .= mysql_field_name($respasig, 5).",";
 	$salida_cvs .= mysql_field_name($respasig, 6).",";
 	$salida_cvs .= mysql_field_name($respasig, 7).",";
-	$salida_cvs .= mysql_field_name($respasig, 9)."";
+	$salida_cvs .= mysql_field_name($respasig, 9).",";
+	$salida_cvs .= "hora";
 	$salida_cvs .= "\n";
 	while($asistencia = mysql_fetch_array($respasig)){
 		$salida_cvs .= utf8_decode($asistencia['apellidop']).",";
@@ -38,7 +41,8 @@ if($_GET['que']=="sede"){
 		$salida_cvs .= utf8_decode($asistencia['dni']).",";
 		$salida_cvs .= utf8_decode($asistencia['ensa']).",";
 		$salida_cvs .= utf8_decode($asistencia['sede']).",";
-		$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+		$salida_cvs .= date("Y-m-d",$asistencia['fecha']).",";
+		$salida_cvs .= date("H:i:s",$asistencia['fecha'])."";
 		$salida_cvs .= "\n";
 	}
 }
@@ -50,7 +54,8 @@ if($_GET['que']=="sedetodo"){
 	$salida_cvs .= mysql_field_name($respasig, 5).",";
 	$salida_cvs .= mysql_field_name($respasig, 6).",";
 	$salida_cvs .= mysql_field_name($respasig, 7).",";
-	$salida_cvs .= mysql_field_name($respasig, 9)."";
+	$salida_cvs .= mysql_field_name($respasig, 9).",";
+	$salida_cvs .= "hora";
 	$salida_cvs .= "\n";
 	while($asistencia = mysql_fetch_array($respasig)){
 		$salida_cvs .= utf8_decode($asistencia['apellidop']).",";
@@ -59,7 +64,8 @@ if($_GET['que']=="sedetodo"){
 		$salida_cvs .= utf8_decode($asistencia['dni']).",";
 		$salida_cvs .= utf8_decode($asistencia['ensa']).",";
 		$salida_cvs .= utf8_decode($asistencia['sede']).",";
-		$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+		$salida_cvs .= date("Y-m-d",$asistencia['fecha']).",";
+		$salida_cvs .= date("H:i:s",$asistencia['fecha'])."";
 		$salida_cvs .= "\n";
 	}
 }
@@ -71,7 +77,8 @@ if($_GET['que']=="por1dias"){
 		$salida_cvs .= mysql_field_name($respasig, 5).",";
 		$salida_cvs .= mysql_field_name($respasig, 6).",";
 		$salida_cvs .= mysql_field_name($respasig, 7).",";
-		$salida_cvs .= mysql_field_name($respasig, 9)."";
+		$salida_cvs .= mysql_field_name($respasig, 9).",";
+		$salida_cvs .= "hora";
 		$salida_cvs .= "\n";
 	while($asistencia = mysql_fetch_array($respasig)){
 		if(date('d', strtotime('-1 days', time()))<=date('d', $asistencia['fecha'])){
@@ -81,7 +88,8 @@ if($_GET['que']=="por1dias"){
 			$salida_cvs .= utf8_decode($asistencia['dni']).",";
 			$salida_cvs .= utf8_decode($asistencia['ensa']).",";
 			$salida_cvs .= utf8_decode($asistencia['sede']).",";
-			$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+			$salida_cvs .= date("Y-m-d",$asistencia['fecha']).",";
+			$salida_cvs .= date("H:i:s",$asistencia['fecha'])."";
 			$salida_cvs .= "\n";
 		}
 	}
@@ -94,7 +102,8 @@ if($_GET['que']=="por7dias"){
 		$salida_cvs .= mysql_field_name($respasig, 5).",";
 		$salida_cvs .= mysql_field_name($respasig, 6).",";
 		$salida_cvs .= mysql_field_name($respasig, 7).",";
-		$salida_cvs .= mysql_field_name($respasig, 9)."";
+		$salida_cvs .= mysql_field_name($respasig, 9).",";
+		$salida_cvs .= "hora";
 		$salida_cvs .= "\n";
 	while($asistencia = mysql_fetch_array($respasig)){
 		if(date('d', strtotime('-7 days', time()))<=date('d', $asistencia['fecha'])){
@@ -104,7 +113,8 @@ if($_GET['que']=="por7dias"){
 			$salida_cvs .= utf8_decode($asistencia['dni']).",";
 			$salida_cvs .= utf8_decode($asistencia['ensa']).",";
 			$salida_cvs .= utf8_decode($asistencia['sede']).",";
-			$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+			$salida_cvs .= date("Y-m-d",$asistencia['fecha']).",";
+			$salida_cvs .= date("H:i:s",$asistencia['fecha'])."";
 			$salida_cvs .= "\n";
 		}
 	}
@@ -117,7 +127,8 @@ if($_GET['que']=="por15dias"){
 		$salida_cvs .= mysql_field_name($respasig, 5).",";
 		$salida_cvs .= mysql_field_name($respasig, 6).",";
 		$salida_cvs .= mysql_field_name($respasig, 7).",";
-		$salida_cvs .= mysql_field_name($respasig, 9)."";
+		$salida_cvs .= mysql_field_name($respasig, 9).",";
+		$salida_cvs .= "hora";
 		$salida_cvs .= "\n";
 	while($asistencia = mysql_fetch_array($respasig)){
 		if(date('d', strtotime('-15 days', time()))<=date('d', $asistencia['fecha'])){
@@ -127,7 +138,8 @@ if($_GET['que']=="por15dias"){
 			$salida_cvs .= utf8_decode($asistencia['dni']).",";
 			$salida_cvs .= utf8_decode($asistencia['ensa']).",";
 			$salida_cvs .= utf8_decode($asistencia['sede']).",";
-			$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+			$salida_cvs .= date("Y-m-d",$asistencia['fecha']).",";
+			$salida_cvs .= date("H:i:s",$asistencia['fecha'])."";
 			$salida_cvs .= "\n";
 		}
 	}
@@ -140,7 +152,8 @@ if($_GET['que']=="por1mes"){
 	$salida_cvs .= mysql_field_name($respasig, 5).",";
 	$salida_cvs .= mysql_field_name($respasig, 6).",";
 	$salida_cvs .= mysql_field_name($respasig, 7).",";
-	$salida_cvs .= mysql_field_name($respasig, 9)."";
+	$salida_cvs .= mysql_field_name($respasig, 9).",";
+	$salida_cvs .= "hora";
 	$salida_cvs .= "\n";
 	while($asistencia = mysql_fetch_array($respasig)){
 		if(date('d', strtotime('-31 days', time()))<=date('d', $asistencia['fecha'])){
@@ -150,15 +163,16 @@ if($_GET['que']=="por1mes"){
 			$salida_cvs .= utf8_decode($asistencia['dni']).",";
 			$salida_cvs .= utf8_decode($asistencia['ensa']).",";
 			$salida_cvs .= utf8_decode($asistencia['sede']).",";
-			$salida_cvs .= date("Y-m-d H-i",$asistencia['fecha'])."";
+			$salida_cvs .= date("Y-m-d",$asistencia['fecha']).",";
+			$salida_cvs .= date("H:i:s",$asistencia['fecha'])."";
 			$salida_cvs .= "\n";
 		}
 	}
 }
 
 header("Content-type: application/vnd.ms-excel");
-header("Content-disposition: csv".date("Y-m-d:")."_".LGlobal::Url_Amigable($config->lagcnombre).".csv");
-header("Content-disposition: filename=asistencia_".date("Y-m-d_H-i")."_".LGlobal::Url_Amigable($config->lagcnombre).".csv");
+header("Content-disposition: csv".date("Y-m-d:")."_".LGlobal::Url_Amigable($bdconfig['nombreapp']).".csv");
+header("Content-disposition: filename=asistencia_".date("Y-m-d_H-i")."_".LGlobal::Url_Amigable($bdconfig['nombreapp']).".csv");
 print $salida_cvs;
 exit;
 ?>

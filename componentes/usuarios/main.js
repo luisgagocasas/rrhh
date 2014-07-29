@@ -22,6 +22,16 @@ $(document).ready(function(){
         id = $('input:checkbox:checked').val();
         window.top.location='?lagc=usuarios&id='+ id + '&editar=true';
     });
+    $("#changepassword").on('click',function(e){
+        e.preventDefault();
+        var id=$(this).attr('href');
+        $.ajax({
+            dataType: 'json',
+            url: "componentes/usuarios/change.php?que=password&id="+id
+        }).done(function(respuesta){
+            $("#mensaje").html(respuesta.mensaje).fadeIn();
+        });
+    });
 });
 function suma(obj) {
     total=parseInt(document.getElementById("numero").value);

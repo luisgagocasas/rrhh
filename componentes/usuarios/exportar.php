@@ -16,8 +16,8 @@ while ($rowr = mysql_fetch_row($values)) {
 }
 
 header("Content-type: application/vnd.ms-excel");
-header("Content-disposition: csv".date("Y-m-d:")."_".LGlobal::Url_Amigable($config->lagcnombre).".csv");
-header("Content-disposition: filename=".date("Y-m-d_H-i")."_".LGlobal::Url_Amigable($config->lagcnombre).".csv");
+header("Content-disposition: csv".date("Y-m-d:")."_".LGlobal::Url_Amigable($bdconfig['nombreapp']).".csv");
+header("Content-disposition: filename=".date("Y-m-d_H-i")."_".LGlobal::Url_Amigable($bdconfig['nombreapp']).".csv");
 print $salida_cvs;
 exit;
 ?>

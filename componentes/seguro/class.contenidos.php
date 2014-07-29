@@ -54,7 +54,7 @@ class Seguros{
 			<a href="?lagc=seguro&id=buscar" title="Buscar" class="menucompo">
 				<img src="plantillas/default/img/lista.png"><b>Buscar Personal</b></a>
 		</div>
-		<h2>Ver seguro del personal</h2>
+		<h2>Busque personal</h2>
 		<div class="tlcabecera">
 			<form method="get" action="" class="frm_validate">
 				<input type="hidden" name="lagc" value="seguro">
@@ -67,13 +67,13 @@ class Seguros{
 			$result = mysql_query("SELECT * FROM usuarios WHERE nombres LIKE '%$palabra%' or apellidop LIKE '%$palabra%' or dni LIKE '%$palabra%' or apellidom LIKE '%$palabra%'");
 			$rows = mysql_num_rows($result);
 			?>
-			<div style="text-align: right;"><b>Resultados (<?=$rows; ?>)</b></div>
 			<ul class="titulos">
 				<li>DNI</li>
 	            <li>Nombre</li>
 	            <li>Apellidos</li>
 	            <li>Estado</li>
-	            <li style="width: 35%">Seguros Asignados</li>
+	            <li style="width: 30%">Sedes asignadas</li>
+	            <li><b>Resultados (<?=$rows; ?>)</b></li>
 	        </ul>
 	        <?php
 	        while($cont = mysql_fetch_array($result)){
@@ -82,9 +82,8 @@ class Seguros{
 		        echo "<li>".$cont['nombres']."</li>";
 			    echo "<li>".$cont['apellidop']." ".$cont['apellidom']."</li>\n";
 		        echo "<li>".Usuarios::estado($cont['estado'])."</li>\n";
-		        echo "<li style=\"width: 35%\">";
-		        echo Seguros::seguropersonal($cont['id']);
-		        echo "</li>\n";
+		        echo "<li style=\"width: 30%\">".Sedes::sede_nombres($cont['sede_id'], $cont['id'])."</li>\n";
+		        echo "<li></li>";
 		        echo "</ul>";
 	        } ?>
 	        <div id="mensaje"></div>
@@ -196,6 +195,10 @@ class Seguros{
 		<div class="tlcabecera">
 			<a href="?lagc=seguro" title="Lista de Seguros" class="menucompo">
 				<img src="plantillas/default/img/lista.png">Todos</a>
+			<a href="?lagc=seguro&id=asignar" title="Asignar Seguro" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Asignar Seguro</a>
+			<a href="?lagc=seguro&id=buscar" title="Buscar" class="menucompo">
+				<img src="plantillas/default/img/lista.png">Buscar Personal</a>
 		</div>
 		<?php
 		if (empty($_POST['nombres'])) {

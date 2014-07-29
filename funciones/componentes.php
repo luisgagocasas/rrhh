@@ -32,47 +32,6 @@ class Componente {
 		Componente::existe($_GET['lagc']);
 		Componente::componentes();
 	}
-	static function SiteDesactivo() {
-		$config = new LagcConfig();
-		$configurapla = "plantillas/".$config->lagctemplsite."/config.xml";
-	if (file_exists($configurapla)) {
-		$plantillas = simplexml_load_file($configurapla);
-		if($plantillas){
-			foreach ($plantillas as $plantilla) {
-				$archivo = "plantillas/".$config->lagctemplsite."/".$plantilla->archivo;
-				if (file_exists($archivo)) {
-		?>
-<!DOCTYPE html>
-<html lang="es">
-<head profile="http://gmpg.org/xfn/11">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title><?=Componente::CompoTitulo($_GET['lagc'], $_GET['id']); ?></title>
-<meta name="rating" content="general">
-<meta name="audience" content="all">
-<meta name="robots" content="index, follow">
-<link rel="shortcut icon" href="favicon.ico">
-<meta name="description" content="<?=$config->lagcdescription; ?>">
-<meta name="generator" content="Lagc Peru">
-<meta name="copyright" content="Lagc Peru">
-<meta name="revisit-after" content="7 days">
-<meta name="google" content="notranslate" />
-<link href="plantillas/<?=$config->lagctemplsite; ?>/css/estilos.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-<table align="center"><tr><td>
-<div class="SiteBloqueado">
-<h1><b><?=$config->lagcnombre; ?></b></h1>
-<p><?=$config->lagcactivmensaje; ?></p>
-</div>
-</td></tr></table>
-</body>
-</html><?php
-				}
-				else { echo "Error abriendo \"plantillas/".$config->lagctemplsite."/".$plantilla->archivo.".tpl\n"; }
-			}
-		} else { echo "Sintaxi XML inválida Revise el archivo \"plantillas/".$config->lagctemplsite."/config.xml\n"; }
-	} else { echo "Error abriendo \"plantillas/".$config->lagctemplsite."/config.xml\n"; }
-	}
 	static function CompoTitulo($compo, $id) {
 		$config = new LagcConfig();
 		if (!empty($_GET['lagc'])) {
@@ -162,12 +121,8 @@ class Componente {
 		else { echo "no se encontro"; }
 	}
 	static function permisos($permiso, $val1, $val2, $val3, $val4){
-		if($permiso==$val1 or $permiso==$val2 or $permiso==$val3){
-			$final = true;
-		}
-		else {
-			$final = false;
-		}
+		if($permiso==$val1 or $permiso==$val2 or $permiso==$val3){ $final = true; }
+		else { $final = false; }
 		return $final;
 	}
 }

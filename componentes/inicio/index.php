@@ -32,11 +32,13 @@ function sede_nombre($val1,$val2){
 	<li style="width: 25%;">Sedes</li>
 	<li style="width: 25%;">Ingreso a la empresa</li>
 	<li style="width: 25%;">Estado</li>
+    <li style="width: 25%;">Asistencia</li>
 </ul>
 <ul class="resultados" style="text-align: center;">
 	<li style="width: 25%;"><?=sede_nombre($usuario['sede_id'], $usuario['id']); ?></li>
 	<li style="width: 25%;"><?=$usuario['fechaingresoempresa']; ?></li>
 	<li style="width: 25%;"><?=Usuarios::estado($usuario['estado']); ?></li>
+    <li style="width: 25%;"><a href="?lagc=asistencia&id=<?=$usuario['id']; ?>&ver=<?=$usuario['nombres']." ".$usuario['apellidop']." ".$usuario['apellidom']; ?>">Mi asistencia</a></li>
 </ul>
 <div class="grid grid-pad">
     <div class="col-1-3">

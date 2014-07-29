@@ -4,7 +4,6 @@ Sistema de RRHH
 
 ### config.php ###
 
-* var $lagcnombre = 'RRHH'; //Nombre de la aplición
 * var $lagcmail = 'luisgago@maestro21.com'; //correo de soporte
 * var $lagcurl = 'http://localhost:8080/rrhh/'; //URL de la aplición
 

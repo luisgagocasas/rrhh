@@ -130,6 +130,26 @@ class Sedes{
 	    }
         return $fin;
 	}
+	static function sede_nombres($val1,$val2){
+		if($val1){
+			$resppc = mysql_query("select * from com_sedes where sede_estado='1'");
+	        while($datapc = mysql_fetch_array($resppc)) {
+	            $aSubcads=split("[|.-]", $val1);//sacar las |
+	            $var1 = 0;
+	            for($k=0;$k<count($aSubcads);$k++)//separar una a una
+	                if ($aSubcads[$k] == $datapc['sede_id']) {
+	                    $var1 = 1;
+	                    break;
+	                }
+	            if ($var1 == 1)
+	                $fin .= "<a href=\"".$datapc['sede_id']."\" title=\"".$val2."\" class=\"asgcursov\">".$datapc['sede_nombre']."</a>, ";
+	        }
+	    }
+	    else {
+	    	$fin = "<a href=\"?lagc=usuarios&id=".$val2."&editar=true\" target=\"_black\">- Editar -</a>";
+	    }
+        return $fin;
+	}
 	static function estado($var1){
 		if($var1=="1"){ $final = "<span class=\"estado bg1\"></span>"; }
 		else if($var1=="0"){ $final = "<span class=\"estado bg2\"></span> "; }

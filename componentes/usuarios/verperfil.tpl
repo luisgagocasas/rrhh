@@ -57,6 +57,12 @@
     </div>
     <div class="col-1-3">
         <?=LGlobal::foto_perfil($cont['id'], "fotop"); ?>
+        <?php if(Componente::permisos($_COOKIE["lgpermisos"], 1, "", 3, 4)){ ?>
+        </br></br>
+        <center>
+            <a href="<?=$cont['id']; ?>" id="changepassword">Cambiar contraseña</a>
+        </center>
+        <?php } ?>
     </div>
     <div class="col-1-3">
         <ul>
@@ -67,3 +73,4 @@
         </ul>
     </div>
 </div>
+<div id="mensaje"></div>

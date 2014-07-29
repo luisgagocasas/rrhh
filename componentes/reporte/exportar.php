@@ -177,8 +177,8 @@ else if($_GET['que']=="sedeseguro"){
 	}
 }
 header("Content-type: application/vnd.ms-excel; charset=UTF-8");
-header("Content-disposition: csv".date("Y-m-d:")."_".LGlobal::Url_Amigable($config->lagcnombre).".csv");
-header("Content-disposition: filename=".date("Y-m-d_H-i")."_".LGlobal::Url_Amigable($config->lagcnombre).".csv");
+header("Content-disposition: csv".date("Y-m-d:")."_".LGlobal::Url_Amigable($bdconfig['nombreapp']).".csv");
+header("Content-disposition: filename=".date("Y-m-d_H-i")."_".LGlobal::Url_Amigable($bdconfig['nombreapp']).".csv");
 print $salida_cvs;
 exit;
 ?>

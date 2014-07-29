@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title><?=$config->lagcnombre; ?> - Lagc Perú</title>
+	<title><?=$bdconfig['nombreapp']; ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="stylesheet" href="plantillas/default/css/estilos.css" />
@@ -11,8 +11,8 @@
 	<div id="pagina">
 		<header class="cabecera">
 			<figure class="logo">
-				<a href="<?=$config->lagcurl; ?>" title="<?=$config->lagcnombre; ?>">
-					<img src="plantillas/default/img/logo-rrhh.png" />
+				<a href="<?=$config->lagcurl; ?>" title="<?=$bdconfig['nombreapp']; ?>">
+					<img src="utilidades/imagenes/<?=$bdconfig['logo']; ?>" />
 				</a>
 			</figure>
 		</header>

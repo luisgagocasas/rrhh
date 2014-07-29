@@ -1,7 +1,6 @@
 <?php
 class LagcConfig {
     //Datos del Sitio
-    var $lagcnombre = 'RRHH';
     var $lagcmail = 'luisgago@maestro21.com';
     var $lagcurl = 'http://localhost:8080/rrhh/';
 
@@ -12,9 +11,6 @@ class LagcConfig {
     var $lagcpass = '';
 
     //Sitio
-    var $lagckeywords = '';
-    var $lagcdescription = '';
-    var $lagcactivmensaje = 'En un momento estaremos activando la pagina web Vuelva en unos momentos.';
     var $lagccompopri = '2';
 
     //Plantillas
@@ -24,4 +20,5 @@ $config = new LagcConfig();
 $con = mysql_connect($config->lagclocal,$config->lagcuser,$config->lagcpass);
 mysql_select_db($config->lagcbd,$con) or die("<center>No hay conexion.</center>");
 mysql_set_charset('utf8');
+$respconfig = mysql_query("select * from configuracion"); $bdconfig = mysql_fetch_array($respconfig);
 ?>

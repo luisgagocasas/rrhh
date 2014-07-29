@@ -15,7 +15,7 @@ $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto"
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Asistencia - <?=$config->lagcnombre; ?></title>
+	<title>Asistencia - <?=$bdconfig['nombreapp']; ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<link rel="shortcut icon" href="../favicon.ico" />
 	<script src="../plantillas/default/js/jquery-1.9.1.min.js"></script>
