@@ -12,6 +12,7 @@ if (file_exists($cnfpla)) {
 		foreach ($plantillas as $plantilla) {
 			$archivo = "plantillas/".$config->lagctemplsite."/inicio.tpl";
 			if (file_exists($archivo)) {
+				date_default_timezone_set("America/Lima");
 				header('Content-Type: text/html; charset=UTF-8');
 				if(empty($_COOKIE["username"])) { include "plantillas/".$config->lagctemplsite."/login.tpl"; }
 				else { include $archivo; }
