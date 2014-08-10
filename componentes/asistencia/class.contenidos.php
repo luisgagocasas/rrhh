@@ -81,7 +81,10 @@ class Asistencia{
 	}
 	static function ver($var1, $var2){ ?>
 		<h2 style="display: inline-block;">Resumen de asistencia de: <?=$var2; ?></h2>
-		<a href="?lagc=asistencia&id=<?=$var1; ?>&nuevo=<?=$var2; ?>" style="text-decoration: none;color: #277386;font-weight: bold;float: right;"><img src="plantillas/default/img/agregar.png" style="width: 25px;" /> Agregar asistencia</a>
+		<div style="float: right;">
+			<a href="?lagc=asistencia&id=<?=$var1; ?>&nuevo=<?=$var2; ?>" style="text-decoration: none;color: #277386;font-weight: bold;"><img src="plantillas/default/img/agregar.png" style="width: 25px;" /> Agregar asistencia </a>
+			<a href="componentes/asistencia/exportar.php?que=sedetodo&usuario=<?=$var1; ?>" title="Exportar"  style="text-decoration: none;color: #277386;font-weight: bold;"><img src="plantillas/default/img/excel.png"  style="width: 25px;" /> Exportar </a>
+		</div>
     	<ul class="titulos">
 			<li>Apellidos</li>
             <li>Nombres</li>
@@ -100,7 +103,7 @@ class Asistencia{
 			   	echo "<li>".$asistencia['dni']."</li>\n";
 			   	echo "<li>".$asistencia['ensa']."</li>\n";
 			   	echo "<li>".$asistencia['sede']."</li>\n";
-			   	echo "<li style=\"width:150px;\">".date("Y-m-d H:i:s",$asistencia['fecha'])."</li>\n";
+			   	echo "<li style=\"width:150px;\">".date("Y-m-d H:i",$asistencia['fecha'])."</li>\n";
 			   	 echo "<li>
 			        <a href=\"?lagc=asistencia&id=".$asistencia['id_asis']."&editar=".$asistencia['nombre']."\" title=\"Editar Asistencia\" class=\"btnopcion\">
 			        	<img src=\"plantillas/default/img/editar.png\" />
@@ -157,7 +160,17 @@ class Asistencia{
                     <div class="col-1-3">
 						<div class="form_control">
 					        <label for="txtfecha">Fecha</label>
-					        <input type="date" name="fecha" id="txtfecha">
+					        <input type="date" name="fecha1" id="txtfecha" value="<?=date("Y-m-d"); ?>">
+					    </div>
+                    </div>
+                    <div class="col-1-3"></div>
+                    <div class="col-1-31"></div>
+                </div>
+                <div class="grid grid-pad select001">
+                    <div class="col-1-3">
+						<div class="form_control">
+					        <label for="txtfecha">Hora, Minuto</label>
+					        <input type="time" name="fecha2" id="txtfecha" value="<?=date("H:i"); ?>">
 					    </div>
                     </div>
                     <div class="col-1-3"></div>
@@ -181,7 +194,8 @@ class Asistencia{
 			mysql_select_db($config->lagcbd,$con);
 			$respsede2 = mysql_query("select * from com_sedes where sede_id=".$_POST['sede']."");
     		$sede2 = mysql_fetch_array($respsede2);
-			$sql = "INSERT INTO com_asistencia (id_user, apellidop, apellidom, nombre, dni, ensa, sede, sede_id, fecha) VALUES ('".$asistencia['id']."', '".$asistencia['apellidop']."', '".$asistencia['apellidom']."', '".$asistencia['nombres']."', '".$asistencia['dni']."', '".$_POST['ensa']."', '".$sede2['sede_nombre']."', '".$_POST['sede']."', '".time($_POST['fecha'])."')";
+    		$tiempoa = date("Y-m-d H:i",strtotime($_POST['fecha1']." ".$_POST['fecha2']));
+			$sql = "INSERT INTO com_asistencia (id_user, apellidop, apellidom, nombre, dni, ensa, sede, sede_id, fecha) VALUES ('".$asistencia['id']."', '".$asistencia['apellidop']."', '".$asistencia['apellidom']."', '".$asistencia['nombres']."', '".$asistencia['dni']."', '".$_POST['ensa']."', '".$sede2['sede_nombre']."', '".$_POST['sede']."', '".strtotime($tiempoa)."')";
 			mysql_query($sql,$con);
 			echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=asistencia&id=".$asistencia['id']."&ver=".$asistencia['nombres']." ".$asistencia['apellidop']." ".$asistencia['apellidom']."'\", 1000) </script>
 			<br><br><center><h3>".$asistencia['nombres']." ".$asistencia['apellidop']." ".$asistencia['apellidom'].".</br>Se guardo correctamente.</h3></center>";
@@ -240,7 +254,17 @@ class Asistencia{
 	                    <div class="col-1-3">
 							<div class="form_control">
 						        <label for="txtfecha">Fecha</label>
-						        <input type="date" name="fecha2" id="txtfecha" value="<?=date("Y-m-d",$cont['fecha']); ?>">
+						        <input type="date" name="fecha1" id="txtfecha" value="<?=date("Y-m-d",$cont['fecha']); ?>">
+						    </div>
+	                    </div>
+	                    <div class="col-1-3"></div>
+	                    <div class="col-1-31"></div>
+	                </div>
+	                <div class="grid grid-pad select001">
+	                    <div class="col-1-3">
+							<div class="form_control">
+						        <label for="txtfecha">Hora, Minuto</label>
+						        <input type="time" name="fecha2" id="txtfecha" value="<?=date("H:i",$cont['fecha']); ?>">
 						    </div>
 	                    </div>
 	                    <div class="col-1-3"></div>
@@ -263,8 +287,9 @@ class Asistencia{
 			$config = new LagcConfig(); //Conexion
 			$con = mysql_connect($config->lagclocal,$config->lagcuser,$config->lagcpass);
 			mysql_select_db($config->lagcbd,$con);
+			$tiempoa = date("Y-m-d H:i",strtotime($_POST['fecha1']." ".$_POST['fecha2']));
 			$respsede2 = mysql_query("select * from com_sedes where sede_id='".$_POST['sede']."'"); $sede2 = mysql_fetch_array($respsede2);
-			$sql = "UPDATE com_asistencia SET ensa='".$_POST['ensa']."', sede_id='".$_POST['sede']."', sede='".$sede2['sede_nombre']."', fecha='".time(date("Y-m-d",$_POST['fecha2']))."' WHERE id_asis='".$id."'";
+			$sql = "UPDATE com_asistencia SET ensa='".$_POST['ensa']."', sede_id='".$_POST['sede']."', sede='".$sede2['sede_nombre']."', fecha='".strtotime($tiempoa)."' WHERE id_asis='".$id."'";
 			$Query = mysql_query ($sql, $con) or die ("Error: <b>" . mysql_error() . "</b>");
 			mysql_close($con);
 			echo "<script type=\"text/javascript\"> setTimeout(\"window.top.location='?lagc=asistencia&id=".$asistencia['id_user']."&ver=".$asistencia['nombre']." ".$asistencia['apellidop']." ".$asistencia['apellidom']."'\", 1500) </script>
